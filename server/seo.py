@@ -27,7 +27,10 @@ def site_origin(host: str = "") -> str:
     # Fallback is only for the desktop server. Production must set SITE_URL.
     if re.fullmatch(r"(?:localhost|127\.0\.0\.1)(?::\d{1,5})?", host, re.I):
         return "http://" + host.lower()
-    if os.environ.get("PORT") not in {None, "", "0"} and re.fullmatch(r"[a-z0-9-]+(?:\.[a-z0-9-]+)*\.run\.app", host, re.I):
+    if os.environ.get("PORT") not in {None, "", "0"} and (
+        re.fullmatch(r"[a-z0-9-]+(?:\.[a-z0-9-]+)*\.run\.app", host, re.I) or
+        re.fullmatch(r"[a-z0-9-]+(?:\.[a-z0-9-]+)*\.onrender\.com", host, re.I)
+    ):
         return "https://" + host.lower()
     return ""
 

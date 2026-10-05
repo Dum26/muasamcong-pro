@@ -16,3 +16,6 @@ data/
 *.pem
 *.key
 *.exe
+*.lnk
+.agents/
+.vscode/

@@ -137,10 +137,10 @@ def inline_extraction_bytes() -> int:
 
 
 def storage_backend() -> str:
-    backend = os.environ.get("STORAGE_BACKEND", "gcs" if production() else "local").strip().lower()
+    backend = os.environ.get("STORAGE_BACKEND", "gcs" if (production() and not (os.environ.get("ALLOW_LOCAL_STORAGE") == "1" or os.environ.get("RENDER"))) else "local").strip().lower()
     if backend not in {"local", "gcs"}:
         raise RuntimeError("STORAGE_BACKEND must be local or gcs.")
-    if production() and backend != "gcs":
+    if production() and backend != "gcs" and not (os.environ.get("ALLOW_LOCAL_STORAGE") == "1" or os.environ.get("RENDER")):
         raise RuntimeError("Production document storage requires GCS.")
     if backend == "gcs" and not os.environ.get("GCS_BUCKET", "").strip():
         raise RuntimeError("GCS_BUCKET is required for GCS storage.")

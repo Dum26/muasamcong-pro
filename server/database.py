@@ -659,7 +659,7 @@ class Database:
             def _sqlite_pragmas(dbapi_connection, _connection_record):
                 dbapi_connection.execute("PRAGMA foreign_keys=ON")
         if migrate_schema is None:
-            migrate_schema = not production()
+            migrate_schema = (not production()) or (os.environ.get("AUTO_MIGRATE") == "1")
         try:
             if migrate_schema:
                 self.migrate()
