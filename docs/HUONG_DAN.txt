@@ -1,0 +1,93 @@
+MỞ TOOL
+Nhấp đúp “Mo MuaSamCong.lnk” trong thư mục này. Không cần mở VS Code.
+Bạn có thể copy shortcut này ra Desktop hoặc ghim vào Start.
+Shortcut sử dụng Python đã có trên máy này. Giữ nguyên thư mục E:\muasamcongtool.
+Đây chưa phải bản EXE độc lập để mang sang máy khác.
+
+MỞ BẢN WEB MỚI
+- Nhấp đúp dist\MuaSamCongPro.exe. Dashboard sẽ tự mở bằng trình duyệt mặc định.
+- Máy chủ chỉ chạy trên máy hiện tại (127.0.0.1), không công khai ra mạng LAN.
+- Trong thanh bên trái, bấm “Chọn thư mục” để chọn nơi lưu các file Excel.
+- Edge/Chrome có thể ghi thẳng vào thư mục đã chọn. Nếu trình duyệt không hỗ trợ,
+  file sẽ được tải theo thiết lập tải xuống của trình duyệt.
+- Bấm “Dừng máy chủ” ở cuối thanh bên trước khi đóng nếu không dùng nữa.
+- Bản web có lọc nhanh trong bảng, sắp xếp, hiển thị toàn bộ, chọn nhiều dòng, xuất các
+  dòng đã chọn, xem chi tiết, lịch sử truy vấn và chế độ sáng/tối.
+- Bật “Quét nhanh khi nhiều kết quả” để danh sách trên 20 kế hoạch dùng ngay dữ
+  liệu tìm kiếm và bỏ qua tải HTLCNT/phân lô từng dòng. Tắt tùy chọn này hoặc tìm
+  riêng một mã khi cần dữ liệu chi tiết và file phân lô.
+- Bấm trực tiếp vào tên một cột để sao chép toàn bộ cột đang được lọc. Các ô trống
+  và thứ tự dòng được giữ nguyên để dán vào Excel không bị lệch.
+
+TÁCH MÃ TBMT TỪ EXCEL / GOOGLE SHEET
+- Mở mục “Tách mã TBMT” trên thanh bên trái.
+- Kéo thả file .xlsx, .csv, .txt hoặc dán trực tiếp vùng dữ liệu từ Google Sheet.
+- Nếu không có file: quét TBMT ở phần Tra cứu, lọc danh sách theo nhu cầu rồi bấm
+  “Lấy mã từ kết quả đang lọc”. Tool sử dụng trực tiếp các dòng còn lại trong bảng.
+- Bấm “Phân tích dữ liệu”. Tool tìm mã IB trong mọi ô, bỏ đuôi phiên bản -00, -01,
+  rồi tra cứu từng mã để lấy trạng thái, địa điểm và hình thức lựa chọn nhà thầu.
+- Hiển thị toàn bộ kết quả, không giới hạn 50 dòng. Chờ tra cứu hoàn tất trước khi
+  xuất Excel. Mã không tìm thấy hoặc tra cứu lỗi vẫn được giữ lại và báo rõ.
+- “Loại mã trùng” được bật mặc định. Có thể tắt để giữ mọi lần xuất hiện.
+- Bấm “Sao chép mã” để lấy một cột mã sạch hoặc “Xuất Excel” để tải bảng rút gọn
+  gồm STT, Mã TBMT, Trạng thái, Địa điểm và Hình thức lựa chọn nhà thầu.
+- Bấm tiêu đề cột trong bảng để sao chép toàn bộ cột đó theo đúng thứ tự đang hiển thị.
+- Tick các mã muốn tải phân lô, hoặc tick ô đầu bảng để chọn tất cả, rồi bấm
+  “Tải phân lô đã chọn”. Ứng dụng tự lấy chi tiết phân lô cho các mã đã chọn.
+- Mỗi gói phân lô tải thành một file Excel .xlsx riêng, không gộp sheet hay ZIP.
+  Danh sách file và mã lỗi hiện dưới bảng kết quả. Có thể bấm tên từng file
+  hoặc chọn thư mục rồi bấm “Lưu / tải lại tất cả” để lưu nhiều file cùng lúc.
+
+SAO CHÉP NHANH
+- Bấm tên cột: sao chép toàn bộ giá trị của cột đó (không kèm tiêu đề).
+- Chuột phải vào ô hoặc tên cột: chọn copy cả cột hoặc chỉ các dòng đã chọn.
+- Copy theo cột giữ nguyên ô trống, giá trị trùng và thứ tự dòng để dán không lệch.
+- Nhấp đúp vào một ô: sao chép nội dung ô đó.
+- Chọn dòng rồi Ctrl+C: sao chép dòng theo thứ tự cột đang hiển thị, dán được vào Excel.
+- Giữ Ctrl để chọn nhiều dòng; giữ Shift để chọn một khoảng.
+- Ctrl+A trong bảng: chọn tất cả dòng.
+- “Copy mã đã chọn”: chỉ lấy mã KHLCNT của những dòng được chọn.
+- Cột “Mã KHLCNT” và các thao tác sao chép mã đều có tiền tố PL.
+- “Copy tất cả mã”: lấy toàn bộ mã và bỏ trùng.
+- Chuột phải trong bảng: mở menu sao chép.
+
+TÌM KIẾM
+HTLCNT luôn được lấy tự động. Bật “Lấy chi tiết KQLCNT” nếu cần nhà thầu trúng.
+- Khi tìm KHLCNT, mỗi mã KHLCNT là một dòng; tên gói và hình thức LCNT lấy từ gói đầu tiên khớp từ khóa.
+- Nếu không có tên gói khớp từ khóa (ví dụ tìm bằng mã KHLCNT), hiển thị gói đầu tiên như trang chi tiết mặc định.
+- Không gộp hình thức của các gói tư vấn vào gói thuốc. Tải phân lô chỉ lấy gói đang hiển thị trên dòng đã chọn.
+- Các gói chưa có KQLCNT vẫn được hiển thị.
+Kết quả đã tải được xếp theo ngày giờ đăng mới nhất trước.
+Nếu cần tải nhiều dữ liệu hơn, tăng số trang tối đa.
+
+QUÉT THÔNG BÁO MỜI THẦU HÀNG LOẠT
+- Chọn loại thông tin “Thông báo mời thầu”.
+- Bật “Lọc theo ngày”, chọn Từ ngày và Đến ngày cần lấy dữ liệu.
+- Có thể để trống ô từ khóa để lấy toàn bộ TBMT trong khoảng ngày đã chọn.
+- Có thể chọn một trạng thái: Chưa đóng thầu, Chưa mở thầu, Đang xét thầu,
+  Có nhà thầu trúng thầu, Không có nhà thầu trúng thầu, Đã hủy TBMT, Đã hủy thầu,
+  Đã hủy KQLCNT, Tuyên bố vô hiệu quyết định về KQLCNT, Không công nhận KQLCNT.
+- Chỉ có ID kết quả chưa đủ để kết luận có nhà thầu trúng. Nếu thiếu trạng thái
+  cụ thể, hiển thị Chưa xác định; mã trạng thái chưa nhận diện được giữ nguyên.
+- Mỗi trang lấy tối đa 50 bản ghi. Tăng “Số trang tối đa” khi cần quét nhiều hơn.
+- Bảng TBMT hiển thị Mã TBMT, trạng thái, thời điểm đóng thầu, tỉnh/thành phố,
+  tên gói thầu, hình thức LCNT, ngày đăng tải, mã KHLCNT và chủ đầu tư.
+- Nếu TBMT không trả địa điểm trong danh sách, tool tự tra cứu KHLCNT liên quan
+  để bổ sung tỉnh/thành. Một số bản ghi vẫn có thể trống nếu cả hai nguồn không công bố.
+- Bấm “Xuất Excel” để lưu toàn bộ kết quả đang hiển thị với đầy đủ các cột TBMT.
+- Khi để trống từ khóa hoặc kết quả trên 20 dòng, tool bỏ qua kiểm tra phân lô để
+  quét nhanh. Muốn tải phân lô, hãy tìm lại bằng mã/từ khóa cụ thể.
+
+TẢI DANH SÁCH PHÂN LÔ
+- Cột “Danh sách phân lô”: “done” khi có bảng phần/lô để xuất Excel;
+  “Ko co file” khi không có danh sách; “Chưa kiểm tra được” nếu truy vấn bị lỗi.
+- Chọn một hoặc nhiều dòng, bấm “Tải phân lô” (hoặc chuột phải), file tự lưu vào E:\ketoan.
+- Tên file: “Danh_sach_phan_lo_<mã gói thầu bỏ đuôi phiên bản>-PL<mã KHLCNT>.xlsx”.
+- Ví dụ: “Danh_sach_phan_lo_BP2600715836-PL2600287943.xlsx”.
+- Mỗi gói thầu trong cùng kế hoạch được lưu thành một file riêng.
+- File đã tồn tại được giữ nguyên; file mới thêm (2), (3), ...
+- Excel dùng mẫu của nút “Xuất Excel” trong mục “Danh sách phần/lô” trên web:
+  đúng cột theo loại gói/thuốc, thứ tự phần/lô, định dạng tiền và bảng biểu.
+- Giữ cả cột trống của mẫu; không thêm cột Mã KHLCNT/Mã gói vào nội dung file.
+- Sau khi cập nhật tool, tìm kiếm lại để lấy đủ thông tin mẫu xuất.
+- Số kết quả là số dòng KHLCNT, không tăng theo số gói thầu bên trong.

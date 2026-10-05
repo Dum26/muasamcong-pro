@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@source "./index.html";
+@source "./*.js";
+
+@theme inline {
+  --color-canvas: var(--ui-background);
+  --color-panel: var(--ui-surface);
+  --color-ink: var(--ui-text-primary);
+  --color-subtle: var(--ui-text-secondary);
+  --color-brand: var(--ui-primary);
+  --color-outline: var(--ui-border);
+  --font-sans: "Segoe UI Variable", "Segoe UI", Arial, sans-serif;
+}

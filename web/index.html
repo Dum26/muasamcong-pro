@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lọc dữ liệu mua sắm công | MuaSamCong Pro</title>
+  <meta name="description" content="MuaSamCong Pro hỗ trợ lọc dữ liệu mua sắm công, tra cứu TBMT, KHLCNT, kết quả lựa chọn nhà thầu và phân tích dữ liệu đấu thầu.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:title" content="Lọc dữ liệu mua sắm công | MuaSamCong Pro">
+  <meta property="og:description" content="MuaSamCong Pro hỗ trợ lọc dữ liệu mua sắm công, tra cứu TBMT, KHLCNT, kết quả lựa chọn nhà thầu và phân tích dữ liệu đấu thầu.">
+  <meta property="og:type" content="website">
+  <!-- SEO_URL_METADATA -->
+  <link rel="icon" href="/app_icon.png">
+  <link rel="stylesheet" href="/tailwind.css">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/pro.css">
+  <link rel="stylesheet" href="/workspace.css">
+  <link rel="stylesheet" href="/ui-system.css">
+  <link rel="stylesheet" href="/seo.css">
+  <link rel="stylesheet" href="/ai-workspace.css">
+  <link rel="stylesheet" href="/intelligence.css">
+  <link rel="stylesheet" href="/bi.css">
+  <link rel="stylesheet" href="/automation.css">
+<link rel="stylesheet" href="/search-engine.css">
+<link rel="stylesheet" href="/document-center.css">
+</head>
+<body>
+  <a class="skip-link" href="#mainContent">Bỏ qua điều hướng</a>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark"><i data-lucide="landmark" aria-hidden="true"></i></div>
+        <div><strong>MuaSamCong <b class="pro-tag">PRO</b></strong><span>ĐẤU THẦU TRONG TẦM TAY</span></div>
+      </div>
+
+      <nav class="nav-list" aria-label="Điều hướng">
+        <div class="nav-caption">KHÔNG GIAN LÀM VIỆC</div>
+        <button class="nav-item active" data-view="overview" title="Tổng quan"><i data-lucide="layout-dashboard" aria-hidden="true"></i><b>Tổng quan</b></button>
+        <button class="nav-item" data-view="search" title="Tra cứu"><i data-lucide="search" aria-hidden="true"></i><b>Tra cứu</b></button>
+        <button class="nav-item" data-view="tracking" title="Theo dõi"><i data-lucide="star" aria-hidden="true"></i><b>Theo dõi</b></button>
+        <button class="nav-item" data-view="codes" title="Danh sách mã"><i data-lucide="list" aria-hidden="true"></i><b>Danh sách mã</b></button>
+        <button class="nav-item" data-view="history" title="Lịch sử"><i data-lucide="history" aria-hidden="true"></i><b>Lịch sử</b></button>
+        <button class="nav-item" data-view="analysis" title="Phân tích truy vấn"><i data-lucide="chart-no-axes-combined" aria-hidden="true"></i><b>Phân tích truy vấn</b></button>
+        <button class="nav-item" data-view="bi" title="Phân tích BI"><i data-lucide="chart-column-increasing" aria-hidden="true"></i><b>Phân tích BI</b></button>
+        <button class="nav-item" data-view="automations" title="Tự động hóa"><i data-lucide="workflow" aria-hidden="true"></i><b>Tự động hóa</b></button>
+        <button class="nav-item" data-view="intelligence" title="Dữ liệu đấu thầu"><i data-lucide="network" aria-hidden="true"></i><b>Dữ liệu đấu thầu</b></button>
+        <button class="nav-item" data-view="ai" title="AI Hồ sơ"><i data-lucide="file-search" aria-hidden="true"></i><b>AI Hồ sơ</b></button>
+        <button class="nav-item" data-view="documents" title="Tài liệu"><i data-lucide="files" aria-hidden="true"></i><b>Tài liệu</b></button>
+        <button class="nav-item" data-view="downloads" title="Tải xuống"><i data-lucide="download" aria-hidden="true"></i><b>Tải xuống</b></button>
+        <button class="nav-item" data-view="settings" title="Cài đặt"><i data-lucide="settings" aria-hidden="true"></i><b>Cài đặt</b></button>
+      </nav>
+
+      <section class="folder-card">
+        <div class="eyebrow">NƠI LƯU DỮ LIỆU</div>
+        <div class="folder-icon">▰</div>
+        <strong id="folderName">Tải xuống của trình duyệt</strong>
+        <p id="folderHint">Chọn một thư mục để mọi file được lưu đúng chỗ.</p>
+        <button class="btn folder-btn" id="chooseFolder">Chọn thư mục</button>
+        <span class="folder-state"><i></i> <span id="folderState">Sẵn sàng</span></span>
+      </section>
+
+      <section class="recent-panel">
+        <div class="eyebrow">TRUY VẤN GẦN ĐÂY</div>
+        <div id="recentList" class="recent-list"><span class="muted-small">Chưa có lịch sử</span></div>
+      </section>
+
+      <div class="sidebar-actions">
+        <button class="icon-btn" id="collapseSidebar" title="Thu gọn thanh bên" aria-label="Thu gọn thanh bên"><i data-lucide="panel-left-close" aria-hidden="true"></i></button>
+        <button class="server-stop" id="stopServer">Dừng máy chủ</button>
+      </div>
+    </aside>
+
+    <main class="main" id="mainContent">
+      <div class="workspace-bar"><div class="topbar-brand"><button id="mobileMenu" class="icon-btn" aria-label="Mở menu"><i data-lucide="menu" aria-hidden="true"></i></button><strong>MuaSamCong <b class="pro-tag">PRO 4.6</b></strong><span class="workspace-divider">/</span><span id="currentViewName">Tổng quan</span></div><div class="topbar-actions"><label class="global-search"><i data-lucide="search" aria-hidden="true"></i><input id="globalSearch" placeholder="Tìm mã, tên gói, chủ đầu tư…" aria-label="Tìm kiếm toàn cục"><kbd>Ctrl K</kbd></label><button id="refreshData" class="icon-btn" title="Chạy lại truy vấn" aria-label="Chạy lại truy vấn"><i data-lucide="refresh-cw" aria-hidden="true"></i></button><span id="apiStatus" class="api-status" role="status">Đang kết nối</span><button class="icon-btn" id="themeToggle" title="Đổi giao diện" aria-label="Đổi giao diện"><i data-lucide="moon" aria-hidden="true"></i></button><div class="account-tools"><button type="button" class="icon-btn" id="notificationsButton" aria-label="Thông báo" aria-expanded="false"><i data-lucide="bell" aria-hidden="true"></i><span id="unreadBadge" class="unread-badge" hidden>0</span></button><button type="button" class="account-button" id="accountButton" aria-label="Tài khoản" aria-expanded="false"><span id="accountAvatar">M</span><span id="accountName">Tài khoản</span><i data-lucide="chevron-down" aria-hidden="true"></i></button><div id="accountMenu" class="account-menu" hidden><strong id="accountEmail">Đang tải…</strong><a id="adminLink" href="/admin" hidden>Quản trị</a><button type="button" id="logoutButton">Đăng xuất</button></div><div id="notificationPanel" class="notification-panel" hidden><div class="notification-head"><strong>Thông báo</strong><button type="button" id="markAllRead">Đánh dấu đã đọc</button></div><div id="notificationList">Đang tải…</div></div></div></div></div>
+      <header class="topbar" data-section="overview">
+        <div class="hero-content">
+          <p class="breadcrumb"><span></span> BÀN LÀM VIỆC ĐẤU THẦU</p>
+          <h1>MuaSamCong Pro – Lọc dữ liệu mua sắm công</h1>
+          <p class="subtitle">Tra cứu gói thầu, theo dõi thay đổi và quản lý dữ liệu trong một nơi.</p>
+          <div class="hero-actions"><a href="#workspace" class="hero-link">Bắt đầu tra cứu <i data-lucide="arrow-up-right" aria-hidden="true"></i></a><div class="live-pill"><span></span>Nguồn dữ liệu e-GP</div></div>
+        </div>
+        <div class="hero-visual" aria-hidden="true"><i data-lucide="chart-no-axes-combined"></i></div>
+      </header>
+
+      <section class="stats-grid" data-section="overview" aria-label="Tổng quan kết quả">
+        <article class="stat-card accent-teal"><div class="stat-icon"><i data-lucide="megaphone" aria-hidden="true"></i></div><div><span>Tổng số TBMT</span><strong id="statTotal">0</strong><small id="statTotalHint">Chưa có truy vấn</small></div></article>
+        <article class="stat-card accent-amber"><div class="stat-icon"><i data-lucide="clock-3" aria-hidden="true"></i></div><div><span id="statOpenLabel">Chưa đóng thầu</span><strong id="statOpen">0</strong><small id="statOpenHint">Còn trước thời điểm đóng</small></div></article>
+        <article class="stat-card accent-blue"><div class="stat-icon"><i data-lucide="scan-search" aria-hidden="true"></i></div><div><span id="statReviewLabel">Đang xét thầu</span><strong id="statReview">0</strong><small id="statReviewHint">Đã mở và đang đánh giá</small></div></article>
+        <article class="stat-card accent-purple"><div class="stat-icon"><i data-lucide="badge-check" aria-hidden="true"></i></div><div><span id="statResultLabel">Gói có KQLCNT</span><strong id="statResult">0</strong><small id="statResultHint">Theo trạng thái thông báo</small></div></article>
+        <article class="stat-card accent-blue"><div class="stat-icon"><i data-lucide="files" aria-hidden="true"></i></div><div><span>Tổng số KHLCNT</span><strong id="statPlans">0</strong><small>Trong truy vấn hiện tại</small></div></article>
+        <article class="stat-card accent-teal"><div class="stat-icon"><i data-lucide="bookmark-check" aria-hidden="true"></i></div><div><span>Gói đang theo dõi</span><strong id="statTracked">0</strong><small>Đã lưu trên máy</small></div></article>
+      </section>
+      <p id="overviewDataStatus" class="data-status" data-section="overview">Chưa fetch dữ liệu · Hãy tra cứu để cập nhật.</p>
+      <section class="deadline-card workspace-panel" data-section="overview"><div class="section-heading"><div><span class="step"><i data-lucide="clock-3" aria-hidden="true"></i></span><div><h2>Sắp đến hạn</h2><p>Các gói chưa đóng thầu, xếp theo thời điểm gần nhất</p></div></div><button class="text-btn" type="button" data-go-view="search">Xem trong tra cứu <i data-lucide="arrow-right" aria-hidden="true"></i></button></div><div id="upcomingDeadlines" class="deadline-list"><p class="empty-inline">Chưa có gói sắp đến hạn trong dữ liệu đã tải.</p></div></section>
+      <section class="seo-intro workspace-panel" data-section="overview" aria-labelledby="seoIntroHeading">
+        <p class="seo-kicker">VỀ CÔNG CỤ</p>
+        <h2 id="seoIntroHeading">Tra cứu và phân tích dữ liệu đấu thầu trong một bàn làm việc</h2>
+        <p>MuaSamCong Pro giúp lọc dữ liệu mua sắm công theo từ khóa, thời gian, trạng thái và địa điểm. Bạn có thể tra cứu thông báo mời thầu (TBMT), kế hoạch lựa chọn nhà thầu (KHLCNT), theo dõi gói quan tâm và xem kết quả lựa chọn nhà thầu khi nguồn dữ liệu cung cấp.</p>
+        <p>Bảng kết quả hỗ trợ xem chủ đầu tư, nhà thầu và các thông tin liên quan; phần phân tích giúp nhìn xu hướng dữ liệu đấu thầu theo thời gian. <a href="/loc-du-lieu-mua-sam-cong">Tìm hiểu cách lọc dữ liệu mua sắm công và sử dụng công cụ</a>.</p>
+      </section>
+
+      <section class="query-card" id="workspace" data-section="search">
+        <div class="section-heading">
+          <div><span class="step">01</span><div><h2>Thiết lập truy vấn</h2><p>Chọn nguồn dữ liệu và điều kiện cần theo dõi</p></div></div>
+          <button class="text-btn" id="resetSearch">Làm mới bộ lọc</button>
+        </div>
+
+        <form id="searchForm">
+          <details class="preset-disclosure"><summary><i data-lucide="bookmark" aria-hidden="true"></i> Bộ tìm kiếm của bạn <small>Lưu và dùng lại truy vấn</small><i class="disclosure-chevron" data-lucide="chevron-down" aria-hidden="true"></i></summary><div class="preset-bar">
+            <label class="field"><span>Bộ tìm kiếm đã lưu</span><select id="savedPresets" aria-label="Bộ tìm kiếm đã lưu"><option value="">Chọn bộ tìm kiếm…</option></select></label>
+            <button type="button" class="btn ghost" id="loadPreset">Áp dụng</button>
+            <button type="button" class="btn ghost" id="deletePreset" title="Xóa bộ tìm kiếm đang chọn">Xóa</button>
+            <button type="button" class="btn ghost" id="pinPreset" disabled>Ghim</button>
+            <button type="button" class="btn ghost" id="watchPreset" disabled>Bật theo dõi</button>
+            <label class="field preset-name"><span>Tên bộ tìm kiếm</span><input id="presetName" maxlength="80" placeholder="Ví dụ: Thuốc generic miền Bắc"></label>
+            <button type="button" class="btn ghost" id="savePreset">Lưu truy vấn</button>
+            <button type="button" class="btn ghost" id="renamePreset" disabled>Đổi tên</button>
+            <small>Lưu cùng tên để cập nhật. Áp dụng rồi bấm Quét dữ liệu để chạy.</small>
+          </div></details>
+          <div class="mode-switch" role="radiogroup" aria-label="Loại dữ liệu">
+            <label><input type="radio" name="mode" value="Thông báo mời thầu" checked><span>Thông báo mời thầu</span></label>
+            <label><input type="radio" name="mode" value="Kế hoạch lựa chọn nhà thầu"><span>Kế hoạch LCNT</span></label>
+          </div>
+
+          <div class="primary-search">
+            <label class="field keyword-field"><span>Mã TBMT / KHLCNT, tên gói, chủ đầu tư, bên mời thầu hoặc từ khóa</span><input id="keyword" autocomplete="off" value="generic" placeholder="Nhập mã, tên gói hoặc đơn vị cần tìm…"></label>
+            <button class="btn search-btn" id="searchButton" type="submit"><i data-lucide="search" aria-hidden="true"></i><span>Quét dữ liệu</span></button>
+          </div>
+
+          <details class="advanced-filters" open><summary><i data-lucide="sliders-horizontal" aria-hidden="true"></i> Bộ lọc nâng cao <i data-lucide="chevron-down" aria-hidden="true"></i></summary><div class="filter-grid">
+            <label class="field"><span>Từ ngày đăng tải</span><input type="text" inputmode="numeric" id="dateFrom" placeholder="dd/mm/yyyy"></label>
+            <label class="field"><span>Đến ngày đăng tải</span><input type="text" inputmode="numeric" id="dateTo" placeholder="dd/mm/yyyy"></label>
+            <label class="field" id="statusField"><span>Trạng thái TBMT</span><select id="statusFilter">
+              <option>Tất cả trạng thái</option><option>Chưa đóng thầu</option><option>Chưa mở thầu</option>
+              <option>Đang xét thầu</option><option>Có nhà thầu trúng thầu</option><option>Không có nhà thầu trúng thầu</option>
+              <option>Đã hủy TBMT</option><option>Đã hủy thầu</option><option>Đã hủy KQLCNT</option>
+              <option>Tuyên bố vô hiệu quyết định về KQLCNT</option><option>Không công nhận KQLCNT</option><option>Chưa xác định</option>
+            </select></label>
+            <label class="field"><span>Số trang tối đa</span><select id="pages"><option>1</option><option>3</option><option selected>5</option><option>10</option><option>20</option><option>50</option></select></label>
+            <label class="field"><span>Hình thức lựa chọn nhà thầu</span><select id="searchFormFilter"><option value="">Tất cả hình thức</option></select></label>
+            <label class="field"><span>Địa điểm</span><select id="searchLocationFilter"><option value="">Tất cả địa điểm</option></select></label>
+          </div></details>
+          <div id="activeFilters" class="active-filters" aria-live="polite"></div>
+
+          <div class="toggle-row">
+            <label class="toggle"><input type="checkbox" id="useDates" checked><i></i><span>Lọc theo ngày</span></label>
+            <label class="toggle"><input type="checkbox" id="removeDuplicates" checked><i></i><span>Loại kết quả trùng</span></label>
+            <label class="toggle plan-only" title="Với trên 20 kế hoạch, bỏ qua kiểm tra file phân lô từng dòng"><input type="checkbox" id="fastMode"><i></i><span>Quét nhanh (bỏ qua kiểm tra file)</span></label>
+            <label class="toggle"><input type="checkbox" id="detail"><i></i><span>Lấy chi tiết KQLCNT</span></label>
+            <span class="filter-note plan-only">Tắt quét nhanh khi cần HTLCNT hoặc phân lô của từng kế hoạch.</span>
+          </div>
+          <div class="date-shortcuts" aria-label="Khoảng ngày nhanh"><span>Ngày đăng tải</span><button type="button" data-date-range="today">Hôm nay</button><button type="button" data-date-range="7">7 ngày qua</button><button type="button" data-date-range="30">30 ngày qua</button><button type="button" data-date-range="month">Tháng này</button><small>Ctrl + K: tìm kiếm nhanh</small></div>
+        </form>
+        <div class="local-search-actions"><button class="btn ghost" type="button" id="localSearchButton">Tìm trong dữ liệu đã đồng bộ</button><small>Trả kết quả từ kho dữ liệu ngay, không gọi e-GP. Quét dữ liệu để lấy thông tin mới.</small></div>
+        <section id="localSearchPanel" class="local-search-panel" hidden aria-label="Kết quả tìm kiếm trong kho">
+          <div class="section-heading"><div><h3>Kết quả trong kho dữ liệu</h3><p id="localSearchStatus" role="status">Đang tìm…</p></div><div><button type="button" class="btn ghost" id="localSearchRefresh">Tải lại kho</button><button type="button" class="btn ghost" id="localSearchClose">Đóng</button></div></div>
+          <div class="local-search-filters"><label>Loại dữ liệu<select id="localSearchKind"><option value="">Tất cả</option><option value="tender">TBMT</option><option value="plan">KHLCNT</option><option value="investor">Chủ đầu tư</option><option value="procurer">Bên mời thầu</option><option value="contractor">Nhà thầu</option></select></label><label>Sắp xếp<select id="localSearchSort"><option value="relevance">Phù hợp nhất</option><option value="published">Ngày đăng</option><option value="deadline">Hạn đóng thầu</option><option value="price">Giá</option><option value="updated">Mới cập nhật</option><option value="name">Tên</option></select></label><label>Số dòng<select id="localSearchSize"><option>25</option><option>50</option><option>100</option></select></label></div>
+          <div class="local-search-filters"><label>Bộ lọc đã lưu<select id="localSearchSaved"><option value="">Chọn bộ lọc…</option></select></label><button type="button" class="btn ghost" id="localSearchLoad">Áp dụng</button><button type="button" class="btn ghost" id="localSearchWatch" disabled>Bật theo dõi</button><label>Tên bộ lọc<input id="localSearchName" maxlength="80" placeholder="Ví dụ: Thiết bị y tế"></label><button type="button" class="btn ghost" id="localSearchSave">Lưu bộ lọc</button></div>
+          <details class="local-search-more"><summary>Bộ lọc nâng cao</summary><div class="local-search-filters"><label>Từ ngày đăng<input id="localSearchFrom" type="date"></label><label>Đến ngày đăng<input id="localSearchTo" type="date"></label><label>Đóng thầu từ<input id="localSearchDeadlineFrom" type="date"></label><label>Đóng thầu đến<input id="localSearchDeadlineTo" type="date"></label><label>Trạng thái<input id="localSearchStatusFilter" placeholder="Trạng thái có trong dữ liệu"></label><label>Địa điểm<input id="localSearchLocation" placeholder="Tỉnh/thành phố"></label><label>Chủ đầu tư<input id="localSearchInvestor" placeholder="Tên chủ đầu tư"></label><label>Bên mời thầu<input id="localSearchProcurer" placeholder="Tên bên mời thầu"></label><label>Nhà thầu<input id="localSearchContractor" placeholder="Tên nhà thầu"></label><label>Hình thức LCNT<input id="localSearchMethod" placeholder="Hình thức"></label><label>Loại hợp đồng<input id="localSearchContract" placeholder="Loại hợp đồng"></label><label>Giá từ<input id="localSearchPriceMin" type="number" min="0"></label><label>Giá đến<input id="localSearchPriceMax" type="number" min="0"></label><label><input id="localSearchResults" type="checkbox"> Chỉ gói có kết quả</label><button type="button" class="btn ghost" id="localSearchClear">Xóa bộ lọc</button></div></details>
+          <div id="localSearchChips" class="local-search-chips" aria-label="Bộ lọc đang áp dụng"></div>
+          <div class="local-search-scroll"><table><thead><tr><th>Loại</th><th>Mã</th><th>Tên</th><th>Chủ đầu tư</th><th>Ngày đăng</th><th>Đóng thầu</th><th>Giá</th><th>Cập nhật</th><th>Thao tác</th></tr></thead><tbody id="localSearchRows"></tbody></table></div>
+          <div class="local-search-pages"><button type="button" class="btn ghost" id="localSearchPrev">Trước</button><span id="localSearchPage"></span><button type="button" class="btn ghost" id="localSearchNext">Sau</button></div>
+        </section>
+      </section>
+
+      <section class="lot-analysis" id="monthlyAnalysis" data-section="analysis" aria-label="Dashboard đấu thầu">
+        <div class="section-heading dashboard-heading"><div><span class="step"><i data-lucide="chart-no-axes-combined" aria-hidden="true"></i></span><div><h2>Dashboard đấu thầu</h2><p id="analysisSource">Biểu đồ tự cập nhật sau mỗi lần tìm kiếm</p></div></div><span class="dashboard-live">Tự cập nhật</span></div>
+        <div class="analysis-controls report-controls">
+          <label class="field"><span>Phạm vi dữ liệu</span><select id="reportScope"><option value="all">Toàn bộ kết quả truy vấn</option><option value="filtered">Các dòng đang lọc trong bảng</option></select></label>
+          <label class="field"><span>Tháng đăng tải</span><select id="reportMonth"></select></label>
+          <label class="field"><span>Từ khóa trong tên gói</span><input id="reportKeyword" placeholder="Ví dụ: generic, thiết bị…"></label>
+        </div>
+        <div class="analysis-stats"><div><span>Kết quả đang phân tích</span><strong id="reportTotal">0</strong></div><div><span>Địa điểm có dữ liệu</span><strong id="reportPlaces">0</strong></div><div><span>Chủ đầu tư có dữ liệu</span><strong id="reportInvestors">0</strong><span id="reportCoverage"></span></div></div>
+        <section class="chart-selection hidden" id="chartSelection" aria-label="Các mã thuộc phần biểu đồ đã chọn">
+          <div class="chart-selection-head"><div><span class="eyebrow">CHI TIẾT TỪ BIỂU ĐỒ</span><h3 id="chartSelectionTitle">Các mã liên quan</h3><p id="chartSelectionHint">Bấm mã để xem chi tiết hoặc mở dòng đó trong bảng.</p></div><div><button class="btn ghost" id="copyChartCodes" type="button">Sao chép mã</button><button class="btn ghost" id="closeChartSelection" type="button" aria-label="Đóng danh sách mã">Đóng</button></div></div>
+          <div id="chartSelectionList" class="chart-selection-list" role="region" aria-label="Danh sách mã từ biểu đồ" tabindex="0"></div>
+        </section>
+        <div class="dashboard-grid">
+        <article class="winner-spotlight" aria-label="Biểu đồ chủ đầu tư">
+          <div class="winner-spotlight-head"><div><span class="eyebrow">CƠ CẤU CHỦ ĐẦU TƯ</span><h3>Chủ đầu tư nào có nhiều gói thầu?</h3><p>Top 10 chủ đầu tư theo số kết quả trong phạm vi đang xem. Bấm cột để xem các mã liên quan.</p></div><span id="reportInvestorBadge" class="winner-badge">Chưa có dữ liệu</span></div>
+          <div id="reportInvestorChart" class="xy-panel" aria-live="polite"></div><p id="reportInvestorNote" class="analysis-note"></p>
+        </article>
+        <div class="report-explorer">
+          <div class="report-explorer-head"><div><span class="eyebrow">THEO DÕI XU HƯỚNG</span><h3>Xu hướng gói thầu theo thời gian</h3><p>Chọn một tháng để xem từng ngày; di chuột vào điểm trên đường để xem số liệu.</p></div><button class="btn ghost" id="downloadReportChart" type="button"><i data-lucide="download" aria-hidden="true"></i> Lưu biểu đồ SVG</button></div>
+          <div class="report-explorer-controls">
+             <label class="field"><span>Đường biểu diễn</span><select id="reportDimension"><option value="total">Tổng kết quả</option><option value="groups">Nhóm mặt hàng</option><option value="locations">Địa điểm</option><option value="investors">Chủ đầu tư</option><option value="winners">Nhà thầu trúng</option><option value="statuses">Trạng thái đấu thầu</option><option value="forms">Hình thức LCNT</option></select></label>
+            <label class="field"><span>Đơn vị hiển thị</span><select id="reportMeasure"><option value="count">Số kết quả</option><option value="percent">Tỷ lệ (%)</option></select></label>
+            <label class="field"><span>Số đường so sánh</span><select id="reportTop"><option value="3" selected>Top 3</option><option value="5">Top 5</option><option value="10">Top 10</option></select></label>
+          </div>
+          <div id="reportFocusChart" class="xy-panel" aria-live="polite"></div>
+          <p id="reportFocusNote" class="analysis-note"></p>
+        </div>
+        <div class="analysis-charts">
+          <article class="locations-wide"><h3>Top 10 địa điểm · số kết quả</h3><div id="reportLocations" class="xy-panel"></div></article>
+          <article id="reportStatusCard"><h3>Trạng thái đấu thầu</h3><div id="reportStatuses" class="xy-panel"></div><p id="reportStatusNote" class="chart-context"></p></article>
+          <article id="reportFormCard"><h3>Hình thức lựa chọn nhà thầu</h3><div id="reportForms" class="xy-panel"></div><p id="reportFormNote" class="chart-context"></p></article>
+        </div>
+        </div>
+        <p class="dashboard-data-note" id="reportDataNote"></p>
+        <details class="dashboard-method"><summary>Phạm vi dữ liệu và cách tính</summary><p class="analysis-note" id="analysisNote"></p></details>
+      </section>
+
+      <section class="extract-card" id="extractor" data-section="codes">
+        <div class="section-heading extract-heading">
+          <div><span class="step">03</span><div><h2>Tra cứu danh sách mã TBMT / KHLCNT</h2><p>Dán mã IB hoặc PL, hoặc tải tệp để tra cứu thông tin gói thầu và kế hoạch lựa chọn nhà thầu</p></div></div>
+          <span class="extract-count" id="extractCount">0 mã</span>
+        </div>
+        <div class="extract-grid">
+          <div class="extract-inputs">
+            <input type="file" id="extractFile" accept=".xlsx,.csv,.txt" hidden>
+            <button class="drop-zone" id="dropZone" type="button">
+              <span><i data-lucide="upload" aria-hidden="true"></i></span><strong>Kéo thả file vào đây</strong><small>hoặc bấm để chọn .xlsx, .csv, .txt</small>
+              <em id="extractFileName">Chưa chọn tệp</em>
+            </button>
+            <label class="field"><span>Hoặc dán danh sách mã TBMT (IB) / KHLCNT (PL) từ Sheet</span><textarea id="extractText" placeholder="IB2600532133&#10;PL2600301140&#10;PL2600301608"></textarea></label>
+            <div class="extract-options">
+              <label class="toggle"><input type="checkbox" id="extractDeduplicate" checked><i></i><span>Loại mã trùng</span></label>
+              <button class="btn ghost extract-live-btn" id="extractFromResults" type="button">Lấy mã từ kết quả đang lọc</button>
+              <button class="btn search-btn" id="runExtract" type="button"><span>Phân tích dữ liệu</span><b>→</b></button>
+            </div>
+          </div>
+          <div class="extract-output">
+            <div class="extract-empty" id="extractEmpty"><div>IB / PL</div><strong>Danh sách mã sẽ hiện ở đây</strong><span>Mã được chuẩn hóa tự động, ví dụ PL...-00 → PL...</span></div>
+            <div class="extract-result hidden" id="extractResult">
+              <div class="extract-result-head"><span>Toàn bộ kết quả · <span id="extractSelectionText">Đã chọn 0 mã</span></span><div><button id="copyExtracted">Sao chép mã</button><button id="downloadExtractedLots" disabled>Tải Excel phân lô</button><button id="exportExtracted">Xuất Excel</button></div></div>
+              <div class="extract-table-wrap" role="region" aria-label="Danh sách mã TBMT và KHLCNT, cuộn để xem thêm" tabindex="0"><table><thead><tr><th class="check-col"><input type="checkbox" id="extractSelectAll" title="Chọn tất cả mã trong bảng" aria-label="Chọn tất cả mã"></th><th data-copy="__stt" title="Bấm để sao chép nguyên cột">STT</th><th data-copy="code_type" title="Bấm để sao chép nguyên cột">Loại mã</th><th data-copy="code" title="Bấm để sao chép nguyên cột">Mã IB / PL</th><th data-copy="title" title="Bấm để sao chép nguyên cột">Tên gói / kế hoạch</th><th data-copy="investor_name" title="Bấm để sao chép nguyên cột">Chủ đầu tư</th><th data-copy="tender_status" title="Bấm để sao chép nguyên cột">Trạng thái TBMT</th><th data-copy="location" title="Bấm để sao chép nguyên cột">Địa điểm</th><th data-copy="bid_form" title="Bấm để sao chép nguyên cột">Hình thức lựa chọn nhà thầu</th></tr></thead><tbody id="extractBody"></tbody></table></div>
+              <small id="extractMore"></small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card" id="results" data-section="search">
+        <div class="results-head">
+          <div><span class="step">02</span><div><h2>Kết quả tra cứu <em id="resultCount">0</em></h2><p id="resultMeta">Chưa fetch dữ liệu · Hãy chạy một truy vấn</p></div></div>
+          <div class="result-tools">
+            <button type="button" class="btn ghost" id="analyzeSearchResults">Phân tích kết quả</button>
+            <label class="mini-search"><i data-lucide="search" aria-hidden="true"></i><input id="quickFilter" aria-label="Lọc nhanh trong bảng" placeholder="Tìm không dấu trong bảng…"></label>
+            <select id="sortBy" title="Sắp xếp"><option value="default">Ngày đăng: cũ → mới</option><option value="newest">Ngày đăng: mới → cũ</option><option value="close">Sắp đóng thầu</option><option value="location">Theo tỉnh/thành</option><option value="status">Theo trạng thái</option></select>
+          </div>
+        </div>
+
+        <div class="result-filters">
+          <label class="field"><span>Trạng thái trong bảng</span><select id="viewStatus"><option value="">Tất cả trạng thái</option></select></label>
+          <label class="field"><span>Tỉnh / Thành phố</span><select id="viewLocation"><option value="">Tất cả địa điểm</option></select></label>
+          <label class="field"><span>Thời hạn đóng thầu</span><select id="viewDeadline"><option value="">Tất cả thời hạn</option><option value="24">Trong 24 giờ tới</option><option value="72">Trong 3 ngày tới</option><option value="168">Trong 7 ngày tới</option></select></label>
+          <button class="btn ghost" id="clearViewFilters">Xóa lọc bảng</button>
+          <button class="btn ghost" id="densityToggle" aria-pressed="false">Bảng gọn</button>
+        </div>
+        <div class="result-insight"><span id="viewSummary" aria-live="polite">Chưa có dữ liệu</span><span id="deadlineSummary">Hạn đóng thầu theo giờ Việt Nam</span></div>
+        <div class="progress-wrap hidden" id="progressWrap">
+          <div class="progress-line"><i></i></div><span id="progressText">Đang kết nối…</span>
+          <div class="result-skeleton" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        </div>
+
+        <div class="table-wrap" role="region" aria-label="Bảng kết quả tra cứu, cuộn để xem thêm" tabindex="0">
+          <table>
+            <thead><tr>
+              <th class="check-col"><input type="checkbox" id="selectAll" title="Chọn tất cả kết quả đang lọc" aria-label="Chọn tất cả kết quả đang lọc"></th>
+              <th data-copy="__stt" title="Bấm để sao chép nguyên cột">STT</th>
+              <th data-copy="__code" title="Bấm để sao chép nguyên cột">Mã TBMT / KHLCNT</th>
+              <th data-copy="__tracking" title="Bấm để sao chép nguyên cột">Theo dõi</th>
+              <th data-copy="__lot_file" title="Bấm để sao chép Có file / Không có file theo đúng thứ tự bảng">File phân lô</th>
+              <th data-copy="tender_status" title="Bấm để sao chép nguyên cột">Trạng thái</th>
+              <th data-copy="bid_close_date" title="Bấm để sao chép nguyên cột">Đóng thầu</th>
+              <th data-copy="location" title="Bấm để sao chép nguyên cột">Tỉnh / Thành phố</th>
+              <th class="wide" data-copy="package_name" title="Bấm để sao chép nguyên cột">Tên gói thầu</th>
+              <th class="wide investor-column" data-copy="investor_name" title="Bấm để sao chép nguyên cột">Chủ đầu tư</th>
+              <th data-copy="__price" title="Bấm để sao chép nguyên cột; nguồn có thể chưa cung cấp giá gói thầu">Giá gói thầu</th>
+              <th data-copy="winner" title="Bấm để sao chép nguyên cột">KQLCNT</th>
+              <th data-copy="bid_form" title="Bấm để sao chép nguyên cột">Hình thức LCNT</th>
+              <th data-copy="public_date" title="Bấm để sao chép nguyên cột">Ngày đăng</th><th></th>
+            </tr></thead>
+            <tbody id="resultBody"></tbody>
+          </table>
+          <div class="empty-state" id="emptyState">
+            <div><i data-lucide="search" aria-hidden="true"></i></div><h3>Bắt đầu một truy vấn mới</h3><p>Chọn khoảng ngày và nhấn “Quét dữ liệu” để xem kết quả.</p>
+          </div>
+        </div>
+
+        <footer class="table-footer">
+          <span id="selectionText">Bấm tiêu đề để sao chép cột · Shift + bấm để sắp xếp</span>
+          <span id="pageText">Hiển thị toàn bộ 0 kết quả</span>
+          <div class="table-actions">
+            <button class="btn ghost" id="copyCodes">Sao chép mã</button>
+            <button class="btn ghost" id="compareTenders" type="button" disabled>So sánh 2–5 gói</button>
+            <button class="btn lot-btn" id="downloadLots">Tải Excel phân lô</button>
+            <button class="btn export-btn" id="exportExcel">Xuất Excel</button>
+          </div>
+        </footer>
+        <div class="pagination"><label>Hiển thị <select id="pageSize"><option>25</option><option selected>50</option><option>100</option></select> dòng / trang</label><span id="paginationSummary">Trang 1 / 1</span><button class="btn ghost" id="prevPage" type="button">← Trước</button><button class="btn ghost" id="nextPage" type="button">Sau →</button></div>
+        <section id="lotDownloads" class="lot-downloads hidden" aria-label="Các file Excel phân lô">
+          <div class="lot-download-head"><div><strong id="lotDownloadSummary"></strong><p>Chỉ bảng Danh sách phần/lô của gói đang hiển thị. Bấm tên file để tải riêng hoặc chọn thư mục rồi bấm “Lưu / tải lại tất cả”. Giữ ứng dụng mở để dùng link tải.</p></div><div><button class="btn ghost" id="chooseLotFolder">Chọn thư mục</button><button class="btn lot-btn" id="saveAllLotFiles">Lưu / tải lại tất cả</button></div></div>
+          <ul id="lotFileList" class="lot-file-list" aria-label="Danh sách file Excel phân lô" tabindex="0"></ul>
+          <ul id="lotIssueList" class="lot-issue-list"></ul>
+        </section>
+      </section>
+      <section class="workspace-panel standalone-panel" data-section="tracking"><div class="section-heading"><div><span class="step"><i data-lucide="star" aria-hidden="true"></i></span><div><h2>Gói đang theo dõi</h2><p>Quản lý ưu tiên, ghi chú và thay đổi của từng gói</p></div></div><span id="trackingCount" class="panel-count">0 gói</span></div><div class="workspace-filterbar"><input id="trackingSearch" placeholder="Tìm mã, tên gói, chủ đầu tư, tag…" aria-label="Tìm trong theo dõi"><select id="trackingStatus"><option value="">Tất cả trạng thái</option><option>Mới</option><option>Đang xem</option><option>Quan tâm</option><option>Đang xử lý</option><option>Hoàn tất</option><option>Bỏ qua</option></select><select id="trackingPriority"><option value="">Mọi ưu tiên</option><option>Thấp</option><option>Trung bình</option><option>Cao</option><option>Khẩn cấp</option></select><label class="filter-check"><input type="checkbox" id="trackingOnlyUpdates"> Có cập nhật mới</label></div><p id="trackingDataStatus" class="data-status">Chưa tải danh sách theo dõi.</p><div id="trackingList"></div></section>
+      <section class="workspace-panel standalone-panel" data-section="history"><div class="section-heading"><div><span class="step"><i data-lucide="history" aria-hidden="true"></i></span><div><h2>Lịch sử truy vấn</h2><p>Ghim, đổi tên hoặc chạy lại đầy đủ bộ lọc</p></div></div></div><p id="historyDataStatus" class="data-status">Chưa tải lịch sử.</p><div id="historyList"></div></section>
+      <section class="workspace-panel standalone-panel" data-section="downloads"><div class="section-heading"><div><span class="step"><i data-lucide="download" aria-hidden="true"></i></span><div><h2>Tải xuống</h2><p>Excel kết quả, danh sách mã và file phân lô đã tạo</p></div></div><button class="btn ghost" id="refreshDownloads"><i data-lucide="refresh-cw" aria-hidden="true"></i> Làm mới danh sách</button></div><div class="download-actions"><button class="btn export-btn" id="exportAllWorkspace">Xuất toàn bộ kết quả</button><button class="btn ghost" id="exportSelectedWorkspace">Xuất dòng đã chọn</button><button class="btn ghost" id="openLotDownloads">Xem file phân lô</button></div><p id="downloadsDataStatus" class="data-status">Chưa tải danh sách file.</p><div id="downloadLibrary"></div></section>
+      <section class="workspace-panel standalone-panel ai-workspace" data-section="ai" aria-labelledby="aiWorkspaceTitle">
+        <div class="section-heading ai-heading"><div><span class="step"><i data-lucide="file-search" aria-hidden="true"></i></span><div><h2 id="aiWorkspaceTitle">AI Hồ sơ đấu thầu</h2><p>Đọc tài liệu, kiểm tra chứng cứ và lưu phân tích theo tài khoản.</p></div></div><span class="ai-config-badge" id="aiConfigBadge">Đang kiểm tra cấu hình</span></div>
+        <p class="ai-privacy"><i data-lucide="shield-check" aria-hidden="true"></i> Tài liệu được xử lý để cung cấp chức năng phân tích. Nội dung chỉ gửi tới AI provider khi bạn chủ động chọn một thao tác AI.</p>
+        <div class="ai-layout">
+          <aside class="ai-documents" aria-label="Tài liệu của bạn"><div class="ai-pane-head"><h3>Tài liệu</h3><span id="aiDocumentCount">0</span></div>
+            <label class="ai-drop" id="aiDropZone" for="aiFileInput" tabindex="0"><i data-lucide="upload-cloud" aria-hidden="true"></i><strong>Kéo file vào đây hoặc chọn file</strong><small>PDF, DOCX, XLSX, XLS, TXT, CSV · tối đa <span id="aiMaxUpload">10 MB</span></small></label>
+            <input id="aiFileInput" type="file" accept=".pdf,.docx,.xlsx,.xls,.txt,.csv" hidden>
+            <label class="ai-field" for="aiTenderCode">Liên kết mã TBMT/KHLCNT <span>(không bắt buộc)</span><input id="aiTenderCode" placeholder="Ví dụ IB2600123456" autocomplete="off"></label>
+            <progress id="aiUploadProgress" max="100" value="0" hidden></progress><p id="aiUploadStatus" class="ai-feedback" role="status"></p>
+            <div id="aiDocumentList" class="ai-document-list" aria-live="polite"><p class="ai-empty">Chưa có tài liệu. Tải một hồ sơ lên để bắt đầu.</p></div>
+            <div class="ai-list-footer"><button class="btn ghost" id="aiPrevPage" type="button" disabled>Trước</button><span id="aiPageLabel">Trang 1</span><button class="btn ghost" id="aiNextPage" type="button" disabled>Sau</button></div>
+          </aside>
+          <section class="ai-viewer" aria-label="Nội dung tài liệu"><div class="ai-pane-head"><div><h3 id="aiDocumentTitle">Nội dung hồ sơ</h3><small id="aiDocumentMeta">Chọn tài liệu để xem</small></div><div class="ai-viewer-actions"><a class="btn ghost hidden" id="aiDownloadDocument" href="#">Tải file</a><button class="btn ghost" id="aiLinkDocument" type="button" hidden>Liên kết mã</button><button class="btn ghost" id="aiProcessDocument" type="button" hidden>Xử lý văn bản</button><button class="btn ghost" id="aiOcrDocument" type="button" hidden>Nhận dạng OCR</button><button class="btn ghost" id="aiDeleteDocument" type="button" hidden>Xóa</button></div></div>
+            <div id="aiViewerStatus" class="ai-feedback" role="status">Chọn một tài liệu ở cột bên trái.</div><div id="aiDocumentContent" class="ai-document-content"></div><button class="btn ghost" id="aiMoreContent" type="button" hidden>Xem thêm nội dung</button>
+          </section>
+          <section class="ai-analysis" aria-label="Phân tích có dẫn nguồn"><div class="ai-pane-head"><h3>Phân tích và chứng cứ</h3></div>
+            <p id="aiConfigStatus" class="ai-config-message">Đang kiểm tra cấu hình AI…</p>
+            <div class="ai-tabs" role="tablist" aria-label="Loại phân tích"><button type="button" role="tab" aria-selected="true" data-ai-tab="summary">Tóm tắt</button><button type="button" role="tab" aria-selected="false" data-ai-tab="catalog">Danh mục</button><button type="button" role="tab" aria-selected="false" data-ai-tab="requirements">Yêu cầu</button><button type="button" role="tab" aria-selected="false" data-ai-tab="timeline">Timeline</button><button type="button" role="tab" aria-selected="false" data-ai-tab="compare">So sánh</button><button type="button" role="tab" aria-selected="false" data-ai-tab="qa">Hỏi đáp</button></div>
+            <div id="aiOperationFields"><label class="ai-field" for="aiOperation">Nội dung cần trích xuất<select id="aiOperation"><option value="summary">Tóm tắt hồ sơ</option><option value="overview">Thông tin chung</option><option value="capacity">Năng lực và kinh nghiệm</option><option value="technical">Yêu cầu kỹ thuật</option><option value="evaluation">Tiêu chí đánh giá</option><option value="catalog">Danh mục hàng hóa/dịch vụ</option><option value="timeline">Timeline và deadline</option><option value="bid_security">Bảo đảm dự thầu</option><option value="contract">Điều kiện hợp đồng</option></select></label>
+            <label class="ai-field hidden" id="aiQuestionField" for="aiQuestion">Câu hỏi trên tài liệu<textarea id="aiQuestion" rows="3" placeholder="Ví dụ: Bảo đảm dự thầu bao nhiêu?"></textarea></label>
+            <div class="ai-field hidden" id="aiCompareField"><label for="aiCompareMode">Kiểu so sánh<select id="aiCompareMode"><option value="compare">Hai hồ sơ</option><option value="compare_versions">Hai phiên bản cùng mã gói</option></select></label><label for="aiCompareDocument">Tài liệu thứ hai<select id="aiCompareDocument"><option value="">Chọn tài liệu để so sánh</option></select></label></div>
+            <div class="ai-action-row"><button class="btn export-btn" id="aiRunAnalysis" type="button" disabled><i data-lucide="sparkles" aria-hidden="true"></i> Phân tích</button><button class="btn ghost" id="aiRefreshAnalysis" type="button" disabled>Phân tích lại</button></div></div>
+            <p id="aiAnalysisStatus" class="ai-feedback" role="status">Chọn tài liệu đã xử lý để xem phân tích.</p><div id="aiAnalysisResult" class="ai-result"></div>
+            <div class="ai-export-row"><button class="btn ghost" id="aiExportXlsx" type="button" hidden>Xuất Excel</button><button class="btn ghost" id="aiExportDocx" type="button" hidden>Xuất DOCX</button><button class="btn ghost" id="aiCopyResult" type="button" hidden>Sao chép</button></div>
+            <details class="ai-history"><summary>Lịch sử phân tích của tài liệu</summary><div id="aiHistoryList"><p>Chưa có phân tích.</p></div></details>
+          </section>
+        </div>
+      </section>
+      <section class="workspace-panel standalone-panel document-center" data-section="documents" aria-labelledby="documentCenterTitle">
+        <div class="section-heading"><div><span class="step"><i data-lucide="files" aria-hidden="true"></i></span><div><h2 id="documentCenterTitle">Trung tâm tài liệu</h2><p>Tài liệu nguồn e-GP và hồ sơ bạn đã tải lên, trong cùng một nơi.</p></div></div><div class="dc-toolbar"><button class="btn ghost" id="documentCenterUpload" type="button"><i data-lucide="upload" aria-hidden="true"></i> Tải lên</button><button class="btn ghost" id="documentCenterExport" type="button"><i data-lucide="file-spreadsheet" aria-hidden="true"></i> Xuất Excel</button><button class="btn ghost" id="documentCenterRefresh" type="button"><i data-lucide="refresh-cw" aria-hidden="true"></i> Làm mới</button></div></div>
+        <div class="document-center-filters"><label>Tìm tài liệu<input id="documentCenterSearch" type="search" placeholder="Tên file, mã gói, nội dung đã trích xuất…" autocomplete="off"></label><label>Mã TBMT<input id="documentCenterTender" placeholder="IB…" autocomplete="off"></label><label>Mã KHLCNT<input id="documentCenterPlan" placeholder="PL…" autocomplete="off"></label><label>Loại tài liệu<input id="documentCenterType" placeholder="HSMT, phụ lục…" autocomplete="off"></label><label>Trạng thái<select id="documentCenterFilterStatus"><option value="">Tất cả</option><option value="metadata_only">Chỉ metadata</option><option value="downloaded">Đã tải file</option><option value="ready">Đã đọc nội dung</option><option value="failed">Lỗi</option></select></label><label>Nguồn<select id="documentCenterSource"><option value="all">Tất cả</option><option value="egp">Nguồn e-GP</option><option value="upload">Tôi tải lên</option></select></label><label>Sắp xếp<select id="documentCenterSort"><option value="updated">Cập nhật gần nhất</option><option value="name">Tên tài liệu</option><option value="size">Kích thước</option></select></label></div>
+        <p id="documentCenterStatus" class="data-status" role="status">Chưa tải danh sách tài liệu.</p>
+        <div class="document-center-layout"><div class="document-center-table-wrap"><table class="document-center-table"><thead><tr><th>Tên tài liệu / loại</th><th>TBMT / KHLCNT</th><th>Tên gói</th><th>Nguồn</th><th>Phiên bản</th><th>Phát hiện</th><th>Cập nhật</th><th>Kích thước</th><th>Trạng thái</th><th>AI</th></tr></thead><tbody id="documentCenterRows"></tbody></table><div class="document-center-pager"><button class="btn ghost" id="documentCenterPrev" type="button">Trước</button><span id="documentCenterPage">Trang 1</span><button class="btn ghost" id="documentCenterNext" type="button">Sau</button></div></div><aside class="document-center-detail" aria-label="Chi tiết tài liệu"><div id="documentCenterDetail">Chọn một tài liệu để xem chi tiết.</div></aside></div>
+      </section>
+      <section class="workspace-panel standalone-panel intel-workspace" data-section="intelligence" aria-labelledby="intelTitle">
+        <div class="section-heading"><div><span class="step"><i data-lucide="network" aria-hidden="true"></i></span><div><h2 id="intelTitle">Dữ liệu đấu thầu</h2><p>Kho gói thầu đã thu thập · Mốc thời gian và liên kết đơn vị dựa trên nguồn thật.</p></div></div><span class="panel-count" id="intelCount">Chưa tải</span></div>
+        <nav class="intel-tabs" aria-label="Khu vực dữ liệu"><button type="button" data-intel-tab="tenders" class="active">Gói thầu</button><button type="button" data-intel-tab="results">KQLCNT</button><button type="button" data-intel-tab="deadlines">Hạn thầu</button><button type="button" data-intel-tab="analytics">Xu hướng</button><button type="button" data-intel-tab="compare">So sánh</button></nav>
+        <div class="intel-filters" id="intelFilters"><label>Tìm trong dữ liệu đã thu thập<input id="intelSearch" placeholder="Mã, tên, chủ đầu tư hoặc investor:…" autocomplete="off"></label><label>Từ ngày<input id="intelFrom" type="date"></label><label>Đến ngày<input id="intelTo" type="date"></label><label>Sắp xếp<select id="intelSort"><option value="published">Ngày đăng</option><option value="deadline">Đóng thầu</option><option value="price">Giá gói</option><option value="updated">Cập nhật</option></select></label><button type="button" class="btn ghost" id="intelApply">Lọc</button></div>
+        <p id="intelStatus" class="data-status" role="status">Chọn một khu vực để xem dữ liệu đã thu thập.</p>
+        <div id="intelContent" class="intel-content"></div>
+        <div id="intelPager" class="intel-pager" hidden><button type="button" class="btn ghost" id="intelPrev">Trước</button><span id="intelPageLabel"></span><button type="button" class="btn ghost" id="intelNext">Sau</button></div>
+      </section>
+      <section class="workspace-panel standalone-panel bi-workspace" data-section="bi" aria-labelledby="biTitle">
+        <div class="section-heading"><div><span class="step"><i data-lucide="chart-column-increasing" aria-hidden="true"></i></span><div><h2 id="biTitle">Phân tích dữ liệu đấu thầu</h2><p>Tổng hợp từ kho dữ liệu đã thu thập, có thể xem lại từng bản ghi nguồn.</p></div></div><span id="biFreshness" class="data-status">Chưa tải</span></div>
+        <nav class="bi-tabs" aria-label="Khu vực phân tích"><button type="button" data-bi-tab="overview" class="active">Tổng quan</button><button type="button" data-bi-tab="tenders">TBMT</button><button type="button" data-bi-tab="khlcnt">KHLCNT</button><button type="button" data-bi-tab="kqlcnt">KQLCNT</button><button type="button" data-bi-tab="contractors">Nhà thầu</button><button type="button" data-bi-tab="investors">Chủ đầu tư</button><button type="button" data-bi-tab="geography">Địa điểm</button><button type="button" data-bi-tab="deadlines">Hạn thầu</button><button type="button" data-bi-tab="changes">Thay đổi</button><button type="button" data-bi-tab="reports">Báo cáo</button><button type="button" data-bi-tab="dashboard">Dashboard riêng</button></nav>
+        <form id="biFilters" class="bi-filters"><label>Khoảng nhanh<select id="biPreset"><option value="custom">Tùy chọn</option><option value="today">Hôm nay</option><option value="7">7 ngày</option><option value="30">30 ngày</option><option value="month">Tháng này</option><option value="last_month">Tháng trước</option><option value="quarter">Quý này</option><option value="last_quarter">Quý trước</option><option value="year">Năm nay</option><option value="last_year">Năm trước</option></select></label><label>Từ ngày<input id="biFrom" type="date"></label><label>Đến ngày<input id="biTo" type="date"></label><label>Trạng thái<input id="biStatusFilter" placeholder="Tất cả"></label><label>Địa điểm<input id="biLocationFilter" placeholder="Tất cả"></label><label>Chủ đầu tư<input id="biInvestorFilter" placeholder="Tất cả"></label><details class="bi-more"><summary>Bộ lọc thêm</summary><div><label>Bên mời thầu<input id="biProcurerFilter"></label><label>Nhà thầu trúng<input id="biContractorFilter"></label><label>Hình thức LCNT<input id="biMethodFilter"></label><label>Loại hợp đồng<input id="biContractFilter"></label><label>Giá từ (₫)<input id="biPriceMin" type="number" min="0"></label><label>Giá đến (₫)<input id="biPriceMax" type="number" min="0"></label></div></details><div class="bi-filter-actions"><button class="btn" type="submit">Áp dụng</button><button class="btn ghost" type="button" id="biReset">Đặt lại</button><button class="btn ghost" type="button" id="biSaveView">Lưu bộ lọc</button></div></form>
+        <div id="biChips" class="bi-chips" aria-live="polite"></div><p id="biStatus" class="data-status" role="status">Chọn tab để tải dữ liệu.</p><div id="biContent" class="bi-content"></div>
+      </section>
+      <section class="workspace-panel standalone-panel automation-workspace" data-section="automations" aria-labelledby="automationTitle">
+        <div class="section-heading"><div><span class="step"><i data-lucide="workflow" aria-hidden="true"></i></span><div><h2 id="automationTitle">Tự động hóa</h2><p>Tạo điều kiện rõ ràng để theo dõi gói, gắn tag và nhận thông báo từ dữ liệu đã thu thập.</p></div></div><button type="button" class="btn" id="automationNew">+ Tạo automation</button></div>
+        <p class="data-status" id="automationStatus" role="status">Chưa tải rule.</p>
+        <div class="automation-summary" id="automationSummary"></div>
+        <div class="automation-analytics" id="automationAnalytics" aria-label="Phân tích automation 14 ngày"></div>
+        <div class="automation-toolbar"><label>Tìm rule<input id="automationSearch" placeholder="Tên rule" autocomplete="off"></label><label>Trạng thái<select id="automationState"><option value="">Tất cả</option><option value="active">Đang chạy</option><option value="paused">Tạm dừng</option><option value="error">Có lỗi gần nhất</option><option value="never">Chưa từng chạy</option></select></label><label>Trigger<select id="automationTriggerFilter"><option value="">Mọi trigger</option></select></label><label>Lần chạy<select id="automationLastRun"><option value="">Mọi thời điểm</option><option value="today">Hôm nay</option><option value="7d">7 ngày gần đây</option><option value="30d">30 ngày gần đây</option></select></label></div>
+        <div id="automationContent"></div>
+      </section>
+      <section class="workspace-panel standalone-panel" data-section="settings"><div class="section-heading"><div><span class="step"><i data-lucide="settings" aria-hidden="true"></i></span><div><h2>Cài đặt bàn làm việc</h2><p>Tùy chỉnh giao diện và nơi lưu file</p></div></div></div><div class="settings-actions"><button class="btn ghost" id="settingsTheme">Đổi sáng / tối</button><button class="btn ghost" id="settingsFolder">Chọn thư mục tải xuống</button><button class="btn ghost" id="importLegacyData">Nhập dữ liệu cũ vào tài khoản</button><p>Chỉ nhập dữ liệu cũ khi bạn chọn. Dữ liệu tài khoản được lưu riêng trên máy chủ.</p></div></section>
+    </main>
+  </div>
+
+  <aside class="drawer" id="detailDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerCode" aria-hidden="true">
+    <div class="drawer-head"><div><span class="eyebrow">CHI TIẾT GÓI THẦU</span><h2 id="drawerCode">—</h2><small id="detailDataStatus" class="data-status">Chưa lấy dữ liệu</small></div><button id="closeDrawer" aria-label="Đóng chi tiết"><i data-lucide="x" aria-hidden="true"></i></button></div>
+    <div id="detailToolbar" class="detail-toolbar"></div>
+    <div id="drawerBody" class="drawer-body"></div>
+  </aside>
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <div class="compare-backdrop hidden" id="compareBackdrop" role="presentation">
+    <section class="compare-dialog" id="compareDialog" role="dialog" aria-modal="true" aria-labelledby="compareTitle" tabindex="-1">
+      <div class="compare-head"><div><span class="eyebrow">DỮ LIỆU GÓI THẦU</span><h2 id="compareTitle">So sánh các gói đã chọn</h2><p>Chỉ hiển thị thông tin có trong kết quả tra cứu hiện tại.</p></div><button class="btn ghost" id="closeCompare" type="button" aria-label="Đóng bảng so sánh"><i data-lucide="x" aria-hidden="true"></i></button></div>
+      <div class="compare-scroll"><table class="compare-table"><tbody id="compareBody"></tbody></table></div>
+    </section>
+  </div>
+  <div class="toast-stack" id="toastStack" role="status" aria-live="polite"></div>
+  <div id="commandPalette" class="command-backdrop hidden" role="dialog" aria-modal="true" aria-label="Tìm kiếm và lệnh nhanh"><div class="command-dialog animate-in fade-in duration-200"><div class="command-search"><i data-lucide="search" aria-hidden="true"></i><input id="commandInput" autocomplete="off" placeholder="Tìm mã, tên gói, chủ đầu tư hoặc nhập lệnh…" aria-label="Nhập lệnh hoặc từ khóa"><kbd>Esc</kbd></div><div id="commandList" class="command-list"></div><div class="command-footer">↑ ↓ chọn · Enter mở · Esc đóng</div></div></div>
+  <script src="/vendor/lucide.min.js"></script>
+  <script src="/app.js"></script>
+  <script src="/analysis.js"></script>
+  <script src="/workspace.js"></script>
+  <script src="/workspace_plus.js"></script>
+  <script src="/ui-system.js"></script>
+  <script src="/account-workspace.js"></script>
+  <script src="/compare.js"></script>
+  <script src="/ai-workspace.js"></script>
+  <script src="/intelligence.js"></script>
+  <script src="/search-engine.js"></script>
+  <script src="/bi.js"></script>
+  <script src="/automation.js"></script>
+  <script src="/document-center.js"></script>
+</body>
+</html>

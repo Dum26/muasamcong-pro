@@ -1,0 +1,34 @@
+MUASAMCONG PRO 3.0 — BÀN LÀM VIỆC ĐẤU THẦU
+
+MỞ ỨNG DỤNG
+Nhấp đúp ..\dist\MuaSamCongPro.exe. Ứng dụng chạy trên máy và mở web local trong trình duyệt.
+Thư mục dist chỉ cần một file EXE. Giữ EXE ở nơi có quyền ghi để lưu theo dõi, lịch sử và file xuất.
+
+LUỒNG LÀM VIỆC
+1. Tra cứu TBMT hoặc KHLCNT theo từ khóa/mã, khoảng ngày và các bộ lọc.
+2. Bấm tên gói hoặc một dòng để xem chi tiết, timeline và mở trang nguồn e-GP.
+3. Bấm ☆ Theo dõi để lưu gói. Trang Theo dõi cho phép ghi chú, tag, ưu tiên, ghim và trạng thái xử lý.
+4. Bấm Thử lại ở gói theo dõi hoặc tra cứu lại để phát hiện thay đổi và xem lịch sử thay đổi.
+5. Xuất Excel từ bảng kết quả hoặc xem file đã tạo trong Download Center.
+
+TBMT VÀ KHLCNT
+TBMT không kiểm tra, hiển thị hoặc xuất cột file phân lô. Excel TBMT không có cột phân lô.
+KHLCNT giữ chức năng phân lô. Mỗi gói có dữ liệu phân lô tạo một file .xlsx riêng, không tạo ZIP.
+Nếu không có dữ liệu hoặc e-GP lỗi, giao diện hiển thị trạng thái rõ ràng và nút Thử lại.
+
+ĐIỀU HƯỚNG VÀ PHÍM TẮT
+Sidebar: Tổng quan, Tra cứu, Theo dõi, Danh sách mã, Lịch sử, Phân tích, Tải xuống, Cài đặt.
+Ctrl + K mở bảng lệnh để tìm mã/tên gói, mở trang và chạy tác vụ nhanh.
+Các tab dùng đường dẫn #overview, #search, #tracking... để mở lại đúng trang mà không tải lại web.
+
+DỮ LIỆU ĐƯỢC LƯU
+saved_queries.json: bộ lọc đã lưu.
+watchlist.json: gói theo dõi, ghi chú, tag, mức ưu tiên và lịch sử thay đổi.
+query_history.json: lịch sử truy vấn.
+download_center: Excel đã xuất và chỉ mục tải lại.
+Các file này nằm cạnh EXE; khi chuyển máy hãy sao chép cùng EXE nếu muốn giữ dữ liệu.
+
+LƯU Ý
+Dashboard phân tích dữ liệu đã tải trong truy vấn hiện tại, không đại diện toàn bộ thị trường.
+Nút Refresh lấy dữ liệu mới; một truy vấn lặp thông thường có thể dùng cache ngắn hạn.
+Ứng dụng không tích hợp AI. Dữ liệu đấu thầu phụ thuộc khả năng truy cập e-GP tại thời điểm tra cứu.

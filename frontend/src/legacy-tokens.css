@@ -1,0 +1,47 @@
+/* Temporary bridge for the remaining dense native forms and tables. */
+body { background: var(--background); color: var(--foreground); font-family: var(--font-sans); }
+.card:not([data-slot]), .dark .card:not([data-slot]) {
+  background: var(--card);
+  color: var(--card-foreground);
+  border-color: var(--border);
+  box-shadow: 0 1px 3px color-mix(in oklab, var(--foreground) 5%, transparent);
+}
+.topbar, .dark .topbar { background: var(--card); border-color: var(--border); }
+.top-actions kbd, .dark .top-actions kbd { background: var(--muted); color: var(--muted-foreground); }
+.user-chip, .muted, small, .page-heading p, .card > p, .facts span { color: var(--muted-foreground); }
+.eyebrow, a:not([data-slot]) { color: var(--primary); }
+a.skip-link { color: var(--primary-foreground); }
+.list-item, .dark .list-item, .document-chunks article, .analysis-result > article { border-color: var(--border); }
+.selected-item, .unread, .dimension-row:hover, .dark .selected-item, .dark .dimension-row:hover { background: var(--accent); color: var(--accent-foreground); }
+button:not([data-slot]), .button {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  transition: background-color 180ms, border-color 180ms, color 180ms;
+}
+button.secondary, .button.secondary, .dark button.secondary, .dark .button.secondary {
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  border: 1px solid var(--border);
+}
+button:not([data-slot]):hover, .button:hover { filter: none; background: color-mix(in oklab, var(--primary) 86%, var(--foreground)); }
+button.secondary:hover, .button.secondary:hover { background: var(--accent); }
+button:not([data-slot]):focus-visible, .button:focus-visible,
+input:not([data-slot]):focus-visible, select:not([data-slot]):focus-visible, textarea:not([data-slot]):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+input:not([data-slot]), select:not([data-slot]), textarea:not([data-slot]),
+.dark input:not([data-slot]), .dark select:not([data-slot]), .dark textarea:not([data-slot]) {
+  background: var(--background);
+  color: var(--foreground);
+  border-color: var(--input);
+}
+input:not([data-slot]):disabled, select:not([data-slot]):disabled, textarea:not([data-slot]):disabled { opacity: .5; cursor: not-allowed; }
+th:not([data-slot]), .dark th:not([data-slot]) { background: var(--muted); color: var(--muted-foreground); border-color: var(--border); }
+td:not([data-slot]), .dark td:not([data-slot]) { border-color: var(--border); }
+.table-scroll [data-slot="table-container"] { overflow: visible; }
+.table-scroll [data-slot="table-head"] { position: sticky; top: 0; z-index: 1; background: var(--card); }
+.skeleton { background: var(--muted); animation: none; }
+.empty { color: var(--muted-foreground); }
+[role="alert"].error { padding: .75rem 1rem; border: 1px solid color-mix(in oklab, var(--destructive) 30%, var(--border)); border-radius: var(--radius); background: color-mix(in oklab, var(--destructive) 7%, var(--card)); color: var(--destructive); }
+@media (prefers-reduced-motion: reduce) { button:not([data-slot]), .button { transition: none; } }

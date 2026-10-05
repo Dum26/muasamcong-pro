@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Quản trị | MuaSamCong Pro</title>
+  <link rel="icon" href="/app_icon.png">
+  <link rel="stylesheet" href="/tailwind.css">
+  <link rel="stylesheet" href="/seo.css">
+  <link rel="stylesheet" href="/admin.css">
+  <link rel="stylesheet" href="/data-quality.css">
+</head>
+<body class="seo-page admin-page">
+  <header class="seo-header"><a class="seo-brand" href="/app">MuaSamCong <strong>Pro</strong></a><nav><a href="/app">Bàn làm việc</a></nav></header>
+  <main class="admin-main admin-shell">
+    <div class="admin-heading"><div><p class="seo-kicker">QUẢN TRỊ HỆ THỐNG</p><h1>Trung tâm vận hành</h1><p id="adminStatus" role="status">Đang tải số liệu…</p></div><a class="admin-back" href="/app"><i data-lucide="arrow-left" aria-hidden="true"></i>Bàn làm việc</a></div>
+    <div id="adminStats" class="admin-stats"></div>
+    <div id="adminAutomation"></div>
+    <section class="sync-center" aria-labelledby="syncTitle">
+      <div class="sync-title-row"><div><p class="seo-kicker">Data Sync Engine</p><h2 id="syncTitle">Trung tâm đồng bộ dữ liệu</h2><p id="adminSyncStatus" role="status">Đang tải trạng thái đồng bộ…</p></div><span id="adminSourceBadge" class="sync-badge" title="Trạng thái được tính theo cửa sổ request gần nhất"><i data-lucide="activity" aria-hidden="true"></i>Đang kiểm tra</span></div>
+      <div class="sync-toolbar" aria-label="Thao tác đồng bộ">
+        <button type="button" class="sync-button primary" id="adminSyncStart"><i data-lucide="play" aria-hidden="true"></i>Tạo lượt đồng bộ</button>
+        <button type="button" class="sync-button" id="adminSyncProcess"><i data-lucide="refresh-cw" aria-hidden="true"></i>Xử lý hàng đợi</button>
+        <button type="button" class="sync-button" id="adminSyncToggle" data-enabled="true"><i data-lucide="pause" aria-hidden="true"></i>Tạm dừng nguồn</button>
+        <button type="button" class="sync-button quiet" id="adminSyncCleanup"><i data-lucide="archive" aria-hidden="true"></i>Dọn job cũ</button>
+      </div>
+      <form id="adminForceSync" class="sync-force-form"><label for="adminForceCode">Cập nhật nhanh một mã TBMT</label><div><input id="adminForceCode" name="entity_id" autocomplete="off" placeholder="Ví dụ: IB2600123456" pattern="[Ii][Bb][A-Za-z0-9._-]{4,48}" required><button class="sync-button" type="submit"><i data-lucide="database-zap" aria-hidden="true"></i>Đưa vào hàng đợi</button></div><small>Dùng mức ưu tiên cao và vẫn áp dụng giới hạn nguồn.</small></form>
+      <div id="adminSyncStats" class="admin-stats sync-kpis" aria-live="polite"></div>
+      <div class="sync-grid"><article class="sync-panel"><div class="panel-heading"><div><h3>Hàng đợi gần đây</h3><p>Job được khóa theo worker và xử lý theo mức ưu tiên.</p></div><i data-lucide="list-checks" aria-hidden="true"></i></div><div id="adminSyncJobs" class="sync-table-wrap"></div></article><article class="sync-panel"><div class="panel-heading"><div><h3>Lượt đồng bộ</h3><p>Tiến độ theo batch, không chạy vòng lặp vô hạn.</p></div><i data-lucide="history" aria-hidden="true"></i></div><div id="adminSyncRuns"></div></article></div>
+    </section>
+    <section class="sync-center" aria-labelledby="adminSearchTitle"><div class="sync-title-row"><div><p class="seo-kicker">Search Engine 2.0</p><h2 id="adminSearchTitle">Chất lượng tìm kiếm</h2><p id="adminSearchStatus">Đang tải số liệu 14 ngày…</p></div></div><div id="adminSearchStats" class="admin-stats sync-kpis"></div><div id="adminSearchTypes"></div></section>
+    <section class="sync-center dq-center" id="dataQualityCenter" aria-labelledby="dqTitle">
+      <div class="sync-title-row"><div><p class="seo-kicker">Data Quality Engine 4.8</p><h2 id="dqTitle">Chất lượng dữ liệu</h2><p id="dqStatus" role="status">Đang đọc kết quả kiểm tra…</p></div><span class="sync-badge"><i data-lucide="shield-check" aria-hidden="true"></i> Quản trị</span></div>
+      <div id="dqStats" class="admin-stats sync-kpis" aria-live="polite"></div>
+      <div class="dq-toolbar"><button class="sync-button primary" type="button" id="dqIncremental">Quét thay đổi</button><button class="sync-button" type="button" id="dqFull">Quét toàn bộ</button><button class="sync-button" type="button" id="dqProcess">Xử lý một lô</button><button class="sync-button quiet" type="button" id="dqRefresh">Làm mới</button></div>
+      <div class="dq-filters"><label>Trạng thái<select id="dqFilterStatus"><option value="open">Đang mở</option><option value="reviewing">Đang xem</option><option value="ignored">Đã bỏ qua</option><option value="resolved">Đã xử lý</option><option value="auto_resolved">Tự hết lỗi</option><option value="all">Tất cả</option></select></label><label>Mức độ<select id="dqFilterSeverity"><option value="">Tất cả</option><option value="info">Thông tin</option><option value="warning">Cảnh báo</option><option value="error">Lỗi</option><option value="critical">Nghiêm trọng</option></select></label><label>Đối tượng<select id="dqFilterEntity"><option value="">Tất cả</option><option value="tender">Gói thầu</option><option value="plan">KHLCNT</option><option value="document">Tài liệu</option><option value="source">Nguồn dữ liệu</option></select></label></div>
+      <div class="sync-table-wrap" id="dqIssues"></div><div class="dq-pager"><button class="sync-button quiet" type="button" id="dqPrev">Trước</button><span id="dqPage">Trang 1</span><button class="sync-button quiet" type="button" id="dqNext">Sau</button></div><aside id="dqDetail" class="dq-detail" hidden aria-live="polite"></aside>
+      <details class="dq-duplicates"><summary>Cặp pháp nhân nghi trùng</summary><p>Chỉ gợi ý đối chiếu khi trùng mã định danh. Hệ thống không tự gộp.</p><div id="dqDuplicates"></div></details>
+      <details class="dq-duplicates"><summary>Lịch sử quét chất lượng</summary><div id="dqRuns">Chưa có lượt quét.</div></details>
+    </section>
+    <section class="sync-center" id="performanceCenter" aria-labelledby="perfTitle">
+      <div class="sync-title-row"><div><p class="seo-kicker">Performance 4.9</p><h2 id="perfTitle">Hiệu năng hệ thống</h2><p id="perfStatus" role="status">Đang đọc số liệu trên instance này…</p></div><button class="sync-button" id="perfRefresh" type="button">Làm mới</button></div>
+      <div id="perfStats" class="admin-stats sync-kpis"></div><div id="perfRoutes" class="sync-table-wrap"></div>
+    </section>
+    <section class="sync-center" aria-labelledby="productionTitle">
+      <div class="sync-title-row"><div><p class="seo-kicker">Production 5.0</p><h2 id="productionTitle">Trạng thái vận hành</h2><p id="productionStatus" role="status">Đang kiểm tra…</p></div><button class="sync-button" id="productionRefresh" type="button">Kiểm tra lại</button></div>
+      <div id="productionStats" class="admin-stats sync-kpis"></div>
+      <p>Số lỗi và yêu cầu chỉ tính trên instance hiện tại. Theo dõi toàn hệ thống trong Google Cloud Monitoring.</p>
+    </section>
+    <section><h2>Sử dụng AI Hồ sơ</h2><p id="adminAiStatus">Đang tải số liệu AI…</p><div id="adminAiStats" class="admin-stats"></div><div id="adminAiModels"></div></section>
+    <section><h2>Job gần đây</h2><div id="adminJobs">Chưa có job.</div></section>
+  </main>
+  <script src="/vendor/lucide.min.js"></script>
+  <script src="/admin-ui.js"></script>
+  <script src="/data-quality.js"></script>
+  <script src="/performance.js"></script>
+  <script src="/production-status.js"></script>
+</body>
+</html>

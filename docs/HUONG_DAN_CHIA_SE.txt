@@ -1,0 +1,25 @@
+MUASAMCONG PRO 2.5 - HƯỚNG DẪN NHANH
+
+1. Copy file MuaSamCongPro.exe vào một thư mục trên máy.
+2. Nhấp đúp MuaSamCongPro.exe.
+3. Trình duyệt mặc định sẽ tự mở dashboard MuaSamCong.
+4. Khi xuất Excel, bấm “Chọn thư mục” ở thanh bên để chọn nơi lưu.
+5. Khi dùng xong, bấm “Dừng máy chủ” ở cuối thanh bên.
+
+Dán danh sách mã TBMT hoặc tải Excel rồi bấm “Phân tích dữ liệu” để tra cứu
+trạng thái, địa điểm và hình thức lựa chọn nhà thầu. Bảng hiển thị toàn bộ mã;
+chờ tra cứu xong rồi xuất Excel để nhận đủ 5 cột như trên màn hình.
+
+Tải phân lô hàng loạt: tick từng mã hoặc ô chọn tất cả ở đầu bảng rồi bấm
+“Tải Excel phân lô”. Ứng dụng tải mỗi gói thành một file .xlsx riêng.
+Nếu trình duyệt chặn tải nhiều file, bấm tên từng file trong danh sách tải
+hoặc chọn thư mục rồi bấm “Lưu / tải lại tất cả”. Mã lỗi hiện trên giao diện.
+
+Ứng dụng chạy cục bộ trên máy người dùng tại 127.0.0.1.
+Không cần cài Python và không cần dùng chung thư mục E:\muasamcongtool.
+
+Nếu Windows SmartScreen hiện cảnh báo do ứng dụng chưa có chứng thư ký số:
+- Chỉ tiếp tục khi file được nhận trực tiếp từ người gửi đáng tin cậy.
+- Chọn “More info” / “Thông tin thêm”, sau đó “Run anyway” / “Vẫn chạy”.
+
+Yêu cầu: Windows 10/11, có Internet và trình duyệt Edge hoặc Chrome.
