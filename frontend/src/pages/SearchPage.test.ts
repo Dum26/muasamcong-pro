@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { searchValidationError, sortableValue } from './SearchPage';
-import type { SearchParams } from '../types';
+import { searchCellText, searchValidationError, sortableValue } from './SearchPage';
+import type { SearchParams, Tender } from '../types';
 
 describe('search result sorting', () => {
   it('orders Vietnamese publication dates chronologically', () => {
@@ -16,4 +16,12 @@ describe('search form validation', () => {
     expect(searchValidationError({ ...valid, date_from: '2026-09-25' })).toMatch(/ngày bắt đầu/);
     expect(searchValidationError(valid)).toBe('');
   });
+});
+
+it('copies the displayed KHLCNT name and preserves empty cells and zero values', () => {
+  const row = { package_name: '', plan_name: 'Kế hoạch mua sắm', tender_status: '', package_price: 0 } as unknown as Tender;
+  expect(searchCellText(row, 'package_name')).toBe('Kế hoạch mua sắm');
+  expect(searchCellText(row, 'tender_status')).toBe('Chưa rõ');
+  expect(searchCellText(row, 'investor_name')).toBe('—');
+  expect(searchCellText(row, 'package_price')).toBe('0');
 });

@@ -32,6 +32,12 @@ const columns: Array<[keyof Tender, string]> = [
   ['public_date', 'Ngày đăng'], ['bid_close_date', 'Đóng thầu'],
   ['tender_status', 'Trạng thái'], ['winner', 'KQLCNT'],
 ];
+export function searchCellText(row: Tender, key: keyof Tender): string {
+  if (key === 'notify_no') return tenderCode(row);
+  if (key === 'package_name') return row.package_name || row.plan_name || '—';
+  if (key === 'tender_status') return row.tender_status || 'Chưa rõ';
+  return String(row[key] ?? '') || '—';
+}
 export function sortableValue(value: unknown, key: keyof Tender): string {
   const raw = String(value ?? '').trim();
   if (key === 'public_date' || key === 'bid_close_date') {
@@ -144,7 +150,7 @@ export function SearchPage() {
     finally { setBusy(false); }
   }
   async function copyColumn(key: keyof Tender) {
-    const values = ordered.map(row => key === 'notify_no' ? tenderCode(row) : String(row[key] ?? '')).map(value => value.replace(/[\t\r\n]+/g, ' '));
+    const values = ordered.map(row => searchCellText(row, key)).map(value => value.replace(/[\t\r\n]+/g, ' '));
     try { await navigator.clipboard.writeText(values.join('\n')); setMessage(`Đã sao chép ${values.length} ô trong cột.`); toast.success(`Đã sao chép ${values.length} ô.`); }
     catch { setError('Không sao chép được. Hãy cấp quyền clipboard cho trình duyệt.'); }
   }
@@ -192,9 +198,9 @@ export function SearchPage() {
       {phase === 'loading' && <div className="skeleton" aria-label="Đang tải kết quả"/>}
       {phase === 'done' && !filtered.length && <EmptyState title="Không có gói phù hợp" description="Hãy đổi từ khóa hoặc điều kiện lọc rồi tra cứu lại."/>}
       {!!filtered.length && <>
-        <div className="flex justify-end py-2"><DropdownMenu><DropdownMenuTrigger asChild><Button variant="outline" size="sm"><Columns3 size={16}/> Cột hiển thị</Button></DropdownMenuTrigger><DropdownMenuContent align="end"><DropdownMenuLabel>Hiển thị cột</DropdownMenuLabel>{columns.map(([key, label]) => <DropdownMenuCheckboxItem key={key} checked={visibleKeys.has(key)} onCheckedChange={() => toggleColumn(key)}>{label}</DropdownMenuCheckboxItem>)}</DropdownMenuContent></DropdownMenu></div>
+        <div className="flex flex-wrap items-center justify-between gap-2 py-2"><p className="text-sm text-muted-foreground">Bấm tên cột để sao chép tất cả kết quả đang lọc. Shift + bấm để sắp xếp.</p><DropdownMenu><DropdownMenuTrigger asChild><Button variant="outline" size="sm"><Columns3 size={16}/> Cột hiển thị</Button></DropdownMenuTrigger><DropdownMenuContent align="end"><DropdownMenuLabel>Hiển thị cột</DropdownMenuLabel>{columns.map(([key, label]) => <DropdownMenuCheckboxItem key={key} checked={visibleKeys.has(key)} onCheckedChange={() => toggleColumn(key)}>{label}</DropdownMenuCheckboxItem>)}</DropdownMenuContent></DropdownMenu></div>
         <div className="table-scroll"><Table><TableHeader><TableRow><TableHead className="w-10"><Checkbox aria-label="Chọn trang" checked={shown.length > 0 && shown.every(row => selected.has(row.index))} onCheckedChange={checked => { const next = new Set(selected); shown.forEach(row => { if (checked === true) next.add(row.index); else next.delete(row.index); }); setSelected(next); }}/></TableHead>
-          {columns.filter(([key]) => visibleKeys.has(key)).map(([key, label]) => <TableHead key={key} aria-sort={sort === key ? descending ? 'descending' : 'ascending' : 'none'}><div className={`flex items-center gap-1 ${key === 'package_price' ? 'justify-end' : ''}`}><Button variant="ghost" size="sm" onClick={() => { setDescending(sort === key ? !descending : false); setSort(key); }} title="Sắp xếp cột">{label}</Button><Button variant="ghost" size="icon-xs" aria-label={`Sao chép cột ${label}`} title={`Sao chép toàn bộ cột ${label}`} onClick={() => void copyColumn(key)}><Copy size={14}/></Button></div></TableHead>)}<TableHead className="w-14">Thao tác</TableHead></TableRow></TableHeader>
+          {columns.filter(([key]) => visibleKeys.has(key)).map(([key, label]) => <TableHead key={key} aria-sort={sort === key ? descending ? 'descending' : 'ascending' : 'none'}><div className={`flex items-center gap-1 ${key === 'package_price' ? 'justify-end' : ''}`}><Button variant="ghost" size="sm" className="flex-1 justify-start" aria-label={`Sao chép toàn bộ cột ${label}`} onClick={event => { if (event.shiftKey) { setDescending(sort === key ? !descending : false); setSort(key); } else { void copyColumn(key); } }} title="Bấm để sao chép cả cột · Shift + bấm để sắp xếp">{label}</Button><Button variant="ghost" size="icon-xs" aria-label={`Sao chép cột ${label}`} title={`Sao chép toàn bộ cột ${label}`} onClick={() => void copyColumn(key)}><Copy size={14}/></Button></div></TableHead>)}<TableHead className="w-14">Thao tác</TableHead></TableRow></TableHeader>
           <TableBody>{shown.map(row => <TableRow key={row.index} data-state={selected.has(row.index) ? 'selected' : undefined}><TableCell><Checkbox aria-label={`Chọn ${tenderCode(row)}`} checked={selected.has(row.index)} onCheckedChange={checked => { const next = new Set(selected); if (checked === true) next.add(row.index); else next.delete(row.index); setSelected(next); }}/></TableCell>
             {columns.filter(([key]) => visibleKeys.has(key)).map(([key]) => <TableCell key={key} className={key === 'package_name' ? 'min-w-72 whitespace-normal' : key === 'package_price' ? 'text-right tabular-nums' : key === 'public_date' || key === 'bid_close_date' ? 'tabular-nums' : undefined}>{key === 'notify_no' ? <Link to={`/app/tenders/${encodeURIComponent(tenderCode(row))}`} state={{ row }}>{tenderCode(row)}</Link> : key === 'package_name' ? row.package_name || row.plan_name || '—' : key === 'tender_status' ? <Badge variant="secondary">{row.tender_status || 'Chưa rõ'}</Badge> : String(row[key] || '—')}</TableCell>)}
             <TableCell><DropdownMenu><DropdownMenuTrigger asChild><Button variant="ghost" size="icon-sm" aria-label={`Thao tác ${tenderCode(row)}`}><MoreHorizontal size={16}/></Button></DropdownMenuTrigger><DropdownMenuContent align="end"><DropdownMenuItem onSelect={() => void toggleWatch(row)}><Star size={16}/>{watchlist.some(item => item.code === tenderCode(row)) ? 'Bỏ theo dõi' : 'Theo dõi'}</DropdownMenuItem><DropdownMenuItem onSelect={() => void navigator.clipboard.writeText(tenderCode(row)).catch(() => setError('Không sao chép được mã.'))}><Copy size={16}/> Sao chép mã</DropdownMenuItem>{row.source_url?.startsWith('https://muasamcong.mpi.gov.vn/') && <DropdownMenuItem onSelect={() => window.open(row.source_url, '_blank', 'noopener,noreferrer')}>Mở nguồn</DropdownMenuItem>}</DropdownMenuContent></DropdownMenu></TableCell></TableRow>)}</TableBody></Table></div>
