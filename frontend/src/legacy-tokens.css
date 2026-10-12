@@ -45,3 +45,20 @@ td:not([data-slot]), .dark td:not([data-slot]) { border-color: var(--border); }
 .empty { color: var(--muted-foreground); }
 [role="alert"].error { padding: .75rem 1rem; border: 1px solid color-mix(in oklab, var(--destructive) 30%, var(--border)); border-radius: var(--radius); background: color-mix(in oklab, var(--destructive) 7%, var(--card)); color: var(--destructive); }
 @media (prefers-reduced-motion: reduce) { button:not([data-slot]), .button { transition: none; } }
+
+/* Keep analytics readable in both themes. */
+.kpi-grid strong { color: var(--primary); }
+.dimension-row i { background: var(--chart-1); }
+
+/* Use lighter weights and more room for Vietnamese diacritics. */
+body { font-size: 14px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+button, input, select, textarea { font-family: inherit; }
+.app-shell .brand, .auth-brand { font-weight: 600; letter-spacing: -.02em; }
+.app-shell .brand b, .auth-brand b { font-weight: 700; }
+.app-shell .sidebar nav a { font-size: 14px; font-weight: 500; }
+.app-shell .sidebar nav a.active { font-weight: 600; }
+.page-heading h1, .dashboard-heading h1 { font-weight: 600; line-height: 1.35; letter-spacing: -.025em; }
+h2, .dashboard-panel-heading h2 { font-weight: 600; line-height: 1.4; }
+label:not([data-slot]), th:not([data-slot]), [data-slot="table-head"] { font-weight: 500; }
+[data-slot="table-cell"], td:not([data-slot]) { line-height: 1.6; }
+.kpi-grid strong, .dashboard-metric strong { font-weight: 650; font-variant-numeric: tabular-nums; }

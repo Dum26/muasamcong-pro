@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import './auth.css';
+import { BrandMark } from '../components/shared/BrandMark';
 
 export function AuthPage({ mode }: { mode: 'login' | 'register' }) {
   const [email, setEmail] = useState('');
@@ -29,7 +30,7 @@ export function AuthPage({ mode }: { mode: 'login' | 'register' }) {
   return <main className="auth-page auth-redesign">
     <div className="auth-shell">
       <section className="auth-form-panel" aria-labelledby="auth-title">
-        <Link to="/" className="auth-brand"><span className="auth-brand-mark">M</span><span>MuaSamCong <b>Pro</b></span></Link>
+        <Link to="/" className="auth-brand"><span className="auth-brand-mark"><BrandMark/></span><span>Bid<b>Desk</b></span></Link>
         <div className="auth-form-wrap">
           <span className="auth-kicker">BÀN LÀM VIỆC ĐẤU THẦU</span>
           <h1 id="auth-title">{mode === 'login' ? 'Chào mừng trở lại.' : 'Bắt đầu làm việc.'}</h1>
@@ -45,10 +46,10 @@ export function AuthPage({ mode }: { mode: 'login' | 'register' }) {
         <p className="auth-footnote"><ShieldCheck size={15}/> Dữ liệu làm việc của bạn được bảo vệ trong tài khoản riêng.</p>
       </section>
 
-      <aside className="auth-visual-panel" aria-label="Giới thiệu MuaSamCong Pro">
+      <aside className="auth-visual-panel" aria-label="Giới thiệu BidDesk">
         <div className="auth-visual-glow" aria-hidden="true"/>
         <div className="auth-visual-content">
-          <span className="auth-visual-kicker">MuaSamCong Pro · Workspace</span>
+          <span className="auth-visual-kicker">BidDesk · Workspace</span>
           <h2>Thông tin rõ ràng.<br/><em>Quyết định tự tin.</em></h2>
           <p>Tra cứu, theo dõi và phân tích dữ liệu đấu thầu trong một luồng làm việc liền mạch.</p>
           <div className="auth-showcase" aria-hidden="true">

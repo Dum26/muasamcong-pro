@@ -1,3 +1,4 @@
+import { BrandMark } from '../components/shared/BrandMark';
 import { Component, lazy, Suspense, useEffect, useState, type ReactNode } from 'react';
 import { Link, Navigate, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router';
 import { Activity, Bell, BookOpen, ChartNoAxesCombined, Clock3, Download, FileText, LayoutDashboard, ListFilter, LogOut, Menu, Moon, Search, Settings, ShieldCheck, Star, Sun, Workflow } from 'lucide-react';
@@ -69,7 +70,7 @@ function Shell() {
   const location = useLocation();
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(localStorage.getItem('msc_react_sidebar') === '1');
-  const [dark, setDark] = useState(localStorage.getItem('msc_theme') !== 'light');
+  const [dark, setDark] = useState(localStorage.getItem('msc_theme') === 'dark');
   const [palette, setPalette] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   useEffect(() => { document.documentElement.dataset.theme = dark ? 'dark' : 'light'; document.documentElement.classList.toggle('dark', dark); localStorage.setItem('msc_theme', dark ? 'dark' : 'light'); }, [dark]);
@@ -87,13 +88,13 @@ function Shell() {
   };
   const navLinks = navGroups.map(group => <div className="nav-group" key={group.label}><small>{group.label}</small>{group.items.map(navLink)}</div>);
   return <TooltipProvider><a className="skip-link" href="#main-content">Chuyển tới nội dung</a><div className={`app-shell ${collapsed ? 'collapsed' : ''}`}>
-    <aside className="sidebar"><div className="brand"><span className="brand-icon">M</span><span>MuaSamCong <b>Pro</b></span></div>
+    <aside className="sidebar"><div className="brand"><span className="brand-icon"><BrandMark/></span><span>Bid<b>Desk</b></span></div>
       <nav aria-label="Điều hướng chính">{navLinks}
         {user?.role === 'admin' && <div className="nav-group"><small>Quản trị</small><Tooltip><TooltipTrigger asChild><Link to="/app/admin" aria-current={location.pathname.startsWith('/app/admin') ? 'page' : undefined} className={location.pathname.startsWith('/app/admin') ? 'active' : ''}><ShieldCheck size={18}/><span>Quản trị</span></Link></TooltipTrigger><TooltipContent side="right">Quản trị</TooltipContent></Tooltip></div>}
       </nav><Button variant="ghost" className="sidebar-toggle" onClick={() => { localStorage.setItem('msc_react_sidebar', collapsed ? '0' : '1'); setCollapsed(!collapsed); }}><Menu size={18}/><span>{collapsed ? 'Mở rộng' : 'Thu gọn'}</span></Button>
     </aside>
     <div className="main-wrap"><header className="topbar"><div className="flex min-w-0 items-center gap-2"><Button className="mobile-nav-trigger" variant="ghost" size="icon" aria-label="Mở điều hướng" onClick={() => setMobileOpen(true)}><Menu size={18}/></Button><span className="muted">Bàn làm việc / </span><strong className="truncate">{title}</strong></div><div className="top-actions"><Button variant="outline" onClick={() => setPalette(true)} className="global-search"><Search size={16}/> Tìm kiếm nhanh <kbd>Ctrl K</kbd></Button><Button asChild variant="ghost" size="icon" aria-label="Mở thông báo"><Link to="/app/notifications"><Bell size={18}/></Link></Button><Button variant="ghost" size="icon" aria-label="Đổi giao diện" onClick={() => setDark(!dark)}>{dark ? <Sun size={18}/> : <Moon size={18}/>}</Button><span className="user-chip">{user?.email}</span><Button variant="ghost" size="icon" aria-label="Đăng xuất" title="Đăng xuất" onClick={() => void logout().then(() => navigate('/login'))}><LogOut size={18}/></Button></div></header><div id="main-content" tabIndex={-1}><ErrorBoundary key={location.pathname}><Outlet context={{ dark, setDark, collapsed, setCollapsed }} /></ErrorBoundary></div></div>
-    <Sheet open={mobileOpen} onOpenChange={setMobileOpen}><SheetContent side="left" className="w-72"><SheetHeader><SheetTitle>MuaSamCong Pro</SheetTitle><SheetDescription>Điều hướng bàn làm việc</SheetDescription></SheetHeader><nav className="sheet-nav" aria-label="Điều hướng trên điện thoại">{navLinks}{user?.role === 'admin' && <Link to="/app/admin" onClick={() => setMobileOpen(false)}><ShieldCheck size={18}/> Quản trị</Link>}</nav></SheetContent></Sheet>
+    <Sheet open={mobileOpen} onOpenChange={setMobileOpen}><SheetContent side="left" className="w-72"><SheetHeader><SheetTitle>BidDesk</SheetTitle><SheetDescription>Điều hướng bàn làm việc</SheetDescription></SheetHeader><nav className="sheet-nav" aria-label="Điều hướng trên điện thoại">{navLinks}{user?.role === 'admin' && <Link to="/app/admin" onClick={() => setMobileOpen(false)}><ShieldCheck size={18}/> Quản trị</Link>}</nav></SheetContent></Sheet>
     <Suspense fallback={null}>{palette && <CommandPalette nav={nav} onClose={() => setPalette(false)} />}</Suspense>
     <Toaster theme={dark ? 'dark' : 'light'} position="bottom-right" richColors/>
   </div></TooltipProvider>;
