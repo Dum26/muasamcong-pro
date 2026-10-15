@@ -10,6 +10,11 @@ const defaults: SearchParams = {
 };
 
 describe('search URL', () => {
+  it('uses result-fetch defaults and preserves an explicit quick-search preference', () => {
+    const detailed = { ...defaults, detail: true, fast_mode: false };
+    expect(searchFromUrl(new URLSearchParams(), detailed)).toEqual(detailed);
+    expect(searchFromUrl(searchToUrl(defaults), detailed)).toEqual(defaults);
+  });
   it('restores every saved filter and page', () => {
     const saved = { ...defaults, mode: 'Kế hoạch lựa chọn nhà thầu' as const,
       keyword: 'thuốc generic', use_dates: false, status: 'Đã đóng thầu', pages: 5,

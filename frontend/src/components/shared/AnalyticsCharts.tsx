@@ -21,7 +21,7 @@ export function AnalyticsTrend({ items, onSelect }: { items: Trend[]; onSelect: 
       <polyline points={points('results')} className="analytics-result-line"/>
       <polyline points={points('tenders')} className="analytics-tender-line"/>
       {chart.map((item, index) => <g key={item.period} role="button" tabIndex={0} className="analytics-point" aria-label={`${item.period}: ${number(item.tenders)} TBMT, ${number(item.results)} có KQLCNT. Bấm để xem dữ liệu.`} onClick={() => onSelect(item.period)} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); onSelect(item.period); } }}>
-        <title>{item.period}: {number(item.tenders)} TBMT · {number(item.results)} có KQLCNT</title>
+        <title>{`${item.period}: ${number(item.tenders)} TBMT · ${number(item.results)} có KQLCNT`}</title>
         <circle cx={x(index)} cy={y(item.tenders)} r="13" fill="transparent"/>
         <circle cx={x(index)} cy={y(item.tenders)} r="4" className="analytics-dot"/>
         {(index % Math.max(1, Math.ceil(chart.length / 6)) === 0 || index === chart.length - 1) && <text x={x(index)} y="260" textAnchor="middle" className="analytics-axis">{item.period}</text>}

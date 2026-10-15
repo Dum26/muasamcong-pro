@@ -24,7 +24,7 @@ const today = new Date();
 const iso = (date: Date) => date.toISOString().slice(0, 10);
 const defaults: SearchParams = { mode: 'Thông báo mời thầu', keyword: '', use_dates: true,
   date_from: iso(new Date(today.getFullYear(), today.getMonth(), 1)), date_to: iso(today),
-  status: 'Tất cả trạng thái', pages: 2, detail: false, fast_mode: true,
+  status: 'Tất cả trạng thái', pages: 2, detail: true, fast_mode: false,
   remove_duplicates: true, bid_form: '', location: '' };
 const columns: Array<[keyof Tender, string]> = [
   ['notify_no', 'Mã TBMT / KHLCNT'], ['package_name', 'Tên gói thầu'],
@@ -32,10 +32,11 @@ const columns: Array<[keyof Tender, string]> = [
   ['public_date', 'Ngày đăng'], ['bid_close_date', 'Đóng thầu'],
   ['tender_status', 'Trạng thái'], ['winner', 'KQLCNT'],
 ];
-export function searchCellText(row: Tender, key: keyof Tender): string {
+export function searchCellText(row: Tender, key: keyof Tender, detailsRequested = false): string {
   if (key === 'notify_no') return tenderCode(row);
   if (key === 'package_name') return row.package_name || row.plan_name || '—';
   if (key === 'tender_status') return row.tender_status || 'Chưa rõ';
+  if (key === 'winner') return row.winner?.trim() || (detailsRequested ? 'Chưa lấy được tên nhà thầu' : 'Chưa lấy KQLCNT');
   return String(row[key] ?? '') || '—';
 }
 export function sortableValue(value: unknown, key: keyof Tender): string {
@@ -57,6 +58,7 @@ export function SearchPage() {
   const [url, setUrl] = useSearchParams();
   const [form, setForm] = useState<SearchParams>(() => searchFromUrl(url, defaults));
   const [rows, setRows] = useState<Tender[]>([]); const [jobId, setJobId] = useState('');
+  const [resultParams, setResultParams] = useState<SearchParams | null>(null);
   const [phase, setPhase] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
   const [message, setMessage] = useState(''); const [error, setError] = useState('');
   const [page, setPage] = useState(() => Math.max(1, Number(url.get('page')) || 1)); const [sort, setSort] = useState<keyof Tender>('public_date');
@@ -96,6 +98,7 @@ export function SearchPage() {
   function changePage(next: number) { setPage(next); setUrl(searchToUrl(form, next), { replace: true }); }
   async function start(event?: FormEvent, params: SearchParams = form) {
     event?.preventDefault();
+    params = { ...params, detail: true, fast_mode: false };
     const invalid = searchValidationError(params);
     if (invalid) { setError(invalid); return; }
     activeRequest.current?.abort();
@@ -113,7 +116,7 @@ export function SearchPage() {
         setMessage(currentJob.message);
         if (currentJob.state === 'error') throw new Error(currentJob.error || currentJob.message);
         if (currentJob.state === 'done') {
-          setRows(currentJob.rows || []); setPhase('done');
+          setRows(currentJob.rows || []); setResultParams(params); setPhase('done');
           void workspaceApi.historyAction({ action: 'complete', params, result_count: currentJob.source_count }).catch(() => {});
           return;
         }
@@ -150,7 +153,7 @@ export function SearchPage() {
     finally { setBusy(false); }
   }
   async function copyColumn(key: keyof Tender) {
-    const values = ordered.map(row => searchCellText(row, key)).map(value => value.replace(/[\t\r\n]+/g, ' '));
+    const values = ordered.map(row => searchCellText(row, key, !!resultParams?.detail && !resultParams.fast_mode)).map(value => value.replace(/[\t\r\n]+/g, ' '));
     try { await navigator.clipboard.writeText(values.join('\n')); setMessage(`Đã sao chép ${values.length} ô trong cột.`); toast.success(`Đã sao chép ${values.length} ô.`); }
     catch { setError('Không sao chép được. Hãy cấp quyền clipboard cho trình duyệt.'); }
   }
@@ -181,7 +184,6 @@ export function SearchPage() {
       {form.use_dates && (!form.date_from || !form.date_to || form.date_from > form.date_to) && <p role="alert" className="error mt-2">Chọn khoảng ngày hợp lệ: ngày bắt đầu không sau ngày kết thúc.</p>}
       <div className="form-actions">
         <label className="check"><Checkbox checked={form.use_dates} onCheckedChange={checked => field('use_dates', checked === true)}/> Lọc theo ngày</label>
-        <label className="check"><Checkbox checked={form.detail} onCheckedChange={checked => field('detail', checked === true)}/> Lấy chi tiết</label>
         <label className="check"><Checkbox checked={form.remove_duplicates} onCheckedChange={checked => field('remove_duplicates', checked === true)}/> Bỏ trùng</label>
         <Button disabled={phase === 'loading' || !!searchValidationError(form)}>{phase === 'loading' ? 'Đang tra cứu…' : 'Tra cứu'}</Button>
         <Button type="button" variant="outline" onClick={() => applyForm(defaults)}>Đặt lại</Button>
@@ -198,11 +200,14 @@ export function SearchPage() {
       {phase === 'loading' && <div className="skeleton" aria-label="Đang tải kết quả"/>}
       {phase === 'done' && !filtered.length && <EmptyState title="Không có gói phù hợp" description="Hãy đổi từ khóa hoặc điều kiện lọc rồi tra cứu lại."/>}
       {!!filtered.length && <>
+        {filtered.some(row => !row.winner?.trim()) && <div className="mb-3 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border bg-muted/40 p-3 text-sm">
+          <p className="m-0 text-muted-foreground">{!resultParams?.detail || resultParams.fast_mode ? 'Lượt tra cứu này chưa lấy đầy đủ KQLCNT.' : 'Một số gói chưa lấy được tên nhà thầu trúng. Nguồn có thể chưa công bố kết quả hoặc chưa trả đủ thông tin.'}</p>
+        </div>}
         <div className="flex flex-wrap items-center justify-between gap-2 py-2"><p className="text-sm text-muted-foreground">Bấm tên cột để sao chép tất cả kết quả đang lọc. Shift + bấm để sắp xếp.</p><DropdownMenu><DropdownMenuTrigger asChild><Button variant="outline" size="sm"><Columns3 size={16}/> Cột hiển thị</Button></DropdownMenuTrigger><DropdownMenuContent align="end"><DropdownMenuLabel>Hiển thị cột</DropdownMenuLabel>{columns.map(([key, label]) => <DropdownMenuCheckboxItem key={key} checked={visibleKeys.has(key)} onCheckedChange={() => toggleColumn(key)}>{label}</DropdownMenuCheckboxItem>)}</DropdownMenuContent></DropdownMenu></div>
         <div className="table-scroll"><Table><TableHeader><TableRow><TableHead className="w-10"><Checkbox aria-label="Chọn trang" checked={shown.length > 0 && shown.every(row => selected.has(row.index))} onCheckedChange={checked => { const next = new Set(selected); shown.forEach(row => { if (checked === true) next.add(row.index); else next.delete(row.index); }); setSelected(next); }}/></TableHead>
           {columns.filter(([key]) => visibleKeys.has(key)).map(([key, label]) => <TableHead key={key} aria-sort={sort === key ? descending ? 'descending' : 'ascending' : 'none'}><div className={`flex items-center gap-1 ${key === 'package_price' ? 'justify-end' : ''}`}><Button variant="ghost" size="sm" className="flex-1 justify-start" aria-label={`Sao chép toàn bộ cột ${label}`} onClick={event => { if (event.shiftKey) { setDescending(sort === key ? !descending : false); setSort(key); } else { void copyColumn(key); } }} title="Bấm để sao chép cả cột · Shift + bấm để sắp xếp">{label}</Button><Button variant="ghost" size="icon-xs" aria-label={`Sao chép cột ${label}`} title={`Sao chép toàn bộ cột ${label}`} onClick={() => void copyColumn(key)}><Copy size={14}/></Button></div></TableHead>)}<TableHead className="w-14">Thao tác</TableHead></TableRow></TableHeader>
           <TableBody>{shown.map(row => <TableRow key={row.index} data-state={selected.has(row.index) ? 'selected' : undefined}><TableCell><Checkbox aria-label={`Chọn ${tenderCode(row)}`} checked={selected.has(row.index)} onCheckedChange={checked => { const next = new Set(selected); if (checked === true) next.add(row.index); else next.delete(row.index); setSelected(next); }}/></TableCell>
-            {columns.filter(([key]) => visibleKeys.has(key)).map(([key]) => <TableCell key={key} className={key === 'package_name' ? 'min-w-72 whitespace-normal' : key === 'package_price' ? 'text-right tabular-nums' : key === 'public_date' || key === 'bid_close_date' ? 'tabular-nums' : undefined}>{key === 'notify_no' ? <Link to={`/app/tenders/${encodeURIComponent(tenderCode(row))}`} state={{ row }}>{tenderCode(row)}</Link> : key === 'package_name' ? row.package_name || row.plan_name || '—' : key === 'tender_status' ? <Badge variant="secondary">{row.tender_status || 'Chưa rõ'}</Badge> : String(row[key] || '—')}</TableCell>)}
+            {columns.filter(([key]) => visibleKeys.has(key)).map(([key]) => <TableCell key={key} className={key === 'package_name' ? 'min-w-72 whitespace-normal' : key === 'package_price' ? 'text-right tabular-nums' : key === 'public_date' || key === 'bid_close_date' ? 'tabular-nums' : undefined}>{key === 'notify_no' ? <Link to={`/app/tenders/${encodeURIComponent(tenderCode(row))}`} state={{ row }}>{tenderCode(row)}</Link> : key === 'package_name' ? row.package_name || row.plan_name || '—' : key === 'tender_status' ? <Badge variant="secondary">{row.tender_status || 'Chưa rõ'}</Badge> : searchCellText(row, key, !!resultParams?.detail && !resultParams.fast_mode)}</TableCell>)}
             <TableCell><DropdownMenu><DropdownMenuTrigger asChild><Button variant="ghost" size="icon-sm" aria-label={`Thao tác ${tenderCode(row)}`}><MoreHorizontal size={16}/></Button></DropdownMenuTrigger><DropdownMenuContent align="end"><DropdownMenuItem onSelect={() => void toggleWatch(row)}><Star size={16}/>{watchlist.some(item => item.code === tenderCode(row)) ? 'Bỏ theo dõi' : 'Theo dõi'}</DropdownMenuItem><DropdownMenuItem onSelect={() => void navigator.clipboard.writeText(tenderCode(row)).catch(() => setError('Không sao chép được mã.'))}><Copy size={16}/> Sao chép mã</DropdownMenuItem>{row.source_url?.startsWith('https://muasamcong.mpi.gov.vn/') && <DropdownMenuItem onSelect={() => window.open(row.source_url, '_blank', 'noopener,noreferrer')}>Mở nguồn</DropdownMenuItem>}</DropdownMenuContent></DropdownMenu></TableCell></TableRow>)}</TableBody></Table></div>
         <Pagination page={page} total={filtered.length} pageSize={50} onChange={changePage}/>
       </>}

@@ -18,6 +18,13 @@ describe('search form validation', () => {
   });
 });
 
+it('distinguishes unfetched KQLCNT from an unavailable winner', () => {
+  const row = { winner: '' } as Tender;
+  expect(searchCellText(row, 'winner')).toBe('Chưa lấy KQLCNT');
+  expect(searchCellText(row, 'winner', true)).toBe('Chưa lấy được tên nhà thầu');
+  expect(searchCellText({ ...row, winner: 'Công ty A' }, 'winner', true)).toBe('Công ty A');
+});
+
 it('copies the displayed KHLCNT name and preserves empty cells and zero values', () => {
   const row = { package_name: '', plan_name: 'Kế hoạch mua sắm', tender_status: '', package_price: 0 } as unknown as Tender;
   expect(searchCellText(row, 'package_name')).toBe('Kế hoạch mua sắm');

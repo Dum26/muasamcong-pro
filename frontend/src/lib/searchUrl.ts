@@ -11,8 +11,8 @@ export function searchFromUrl(url: URLSearchParams, defaults: SearchParams): Sea
     date_to: url.get('to') || defaults.date_to,
     status: url.get('status') || defaults.status,
     pages: Number.isInteger(pages) && pages >= 1 && pages <= 30 ? pages : defaults.pages,
-    detail: url.get('detail') === '1',
-    fast_mode: url.get('fast') !== '0',
+    detail: url.has('detail') ? url.get('detail') === '1' : defaults.detail,
+    fast_mode: url.has('fast') ? url.get('fast') !== '0' : defaults.fast_mode,
     remove_duplicates: url.get('dedup') !== '0',
     bid_form: url.get('bid_form') || '',
     location: url.get('location') || '',
@@ -28,8 +28,8 @@ export function searchToUrl(params: SearchParams, page = 1): URLSearchParams {
   if (params.date_to) url.set('to', params.date_to);
   if (params.status !== 'Tất cả trạng thái') url.set('status', params.status);
   if (params.pages !== 2) url.set('pages', String(params.pages));
-  if (params.detail) url.set('detail', '1');
-  if (!params.fast_mode) url.set('fast', '0');
+  url.set('detail', params.detail ? '1' : '0');
+  url.set('fast', params.fast_mode ? '1' : '0');
   if (!params.remove_duplicates) url.set('dedup', '0');
   if (params.bid_form) url.set('bid_form', params.bid_form);
   if (params.location) url.set('location', params.location);
